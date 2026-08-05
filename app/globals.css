@@ -1,0 +1,259 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Site tek temalı (dark). Değişken yine de .dark altında da geçerli olsun ki
+   shadcn/ui CLI ile eklenen bileşenlerdeki dark: varyantları sessizce ölmesin. */
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+   Ham palet — OKLCH.
+   Kontrast oranları sRGB'ye kırpılmış hâlleri üzerinden ölçüldü (yorumlarda).
+   primary ve ocean sRGB gamut'unun bir tık dışında: geniş gamut (P3) ekranlarda
+   daha doygun görünür, sRGB ekranlarda tarayıcı otomatik kırpar. Kırpılmış
+   hâlleriyle bile hedef kontrastları geçiyorlar, bu yüzden bilinçli bırakıldı.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  /* Yüzeyler */
+  --background: oklch(0.14 0.06 270); /* #030521 — sayfa zemini */
+  --surface: oklch(0.21 0.09 270); /* #0a1141 — kart / panel */
+  --surface-raised: oklch(0.26 0.08 270); /* hover ve yükseltilmiş kart */
+
+  /* Metin */
+  --foreground: oklch(0.97 0.01 270); /* 18.33:1 zemin üstünde — AAA */
+  --muted-foreground: oklch(0.75 0.03 270); /* 8.97:1 zemin üstünde — AAA */
+
+  /* Çizgiler
+     border  : dekoratif ayraç. Kontrastı düşük, bilinçli.
+     input   : etkileşimli sınır (form alanı, seçili sekme, focus halkası).
+               WCAG 1.4.11 gereği 3:1 şart — 0.30 bunu sağlamıyordu (1.30:1),
+               bu yüzden ayrı ve daha açık bir token olarak tanımlandı. */
+  --border: oklch(0.3 0.07 270); /* #202b51 */
+  --input: oklch(0.52 0.07 270); /* #596792 — kart üstünde 3.24:1 */
+
+  /* Vurgular */
+  --primary: oklch(0.82 0.16 195); /* neon turkuaz — 12.48:1 zemin üstünde, AAA */
+  --primary-foreground: oklch(0.14 0.06 270); /* turkuaz üstüne koyu metin */
+
+  --ocean: oklch(0.68 0.2 250); /* okyanus mavisi — 6.79:1, AA */
+  --ocean-strong: oklch(0.72 0.16 250); /* küçük metin gerektiğinde — 8.03:1, AAA */
+  --ocean-foreground: oklch(0.14 0.06 270);
+
+  /* shadcn/ui'nin secondary/accent'i "sessiz yüzey" anlamında kullanır;
+     marka mavisi bunlara bağlanmaz, ocean üzerinden bilinçle çağrılır. */
+  --secondary: oklch(0.26 0.08 270);
+  --secondary-foreground: oklch(0.97 0.01 270);
+  --accent: oklch(0.3 0.07 270);
+  --accent-foreground: oklch(0.97 0.01 270);
+  --muted: oklch(0.21 0.09 270);
+
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.18 0.08 270);
+  --popover-foreground: var(--foreground);
+
+  --destructive: oklch(0.65 0.19 25);
+  --destructive-foreground: oklch(0.99 0.01 25);
+
+  --ring: oklch(0.82 0.16 195);
+
+  /* Veri görselleştirme / rozet renkleri (sponsor katmanları, yarışma dereceleri) */
+  --chart-1: oklch(0.82 0.16 195);
+  --chart-2: oklch(0.68 0.2 250);
+  --chart-3: oklch(0.75 0.15 160);
+  --chart-4: oklch(0.78 0.14 90);
+  --chart-5: oklch(0.7 0.16 320);
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+   Tailwind teması. `inline` sayesinde değişkenler derleme anında çözülmez,
+   var() olarak kalır — ileride açık tema eklenecekse tek yerden değişir.
+--------------------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ocean: var(--ocean);
+  --color-ocean-strong: var(--ocean-strong);
+  --color-ocean-foreground: var(--ocean-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Tipografi — next/font değişkenleri lib/fonts.ts'ten gelir */
+  --font-sans: var(--font-ubuntu), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --font-mono: var(--font-ubuntu-mono), ui-monospace, "Cascadia Mono", monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Neon turkuaz parıltı — CTA ve kart hover'larında */
+  --shadow-glow: 0 0 0 1px oklch(0.82 0.16 195 / 0.25), 0 8px 32px -8px oklch(0.82 0.16 195 / 0.35);
+  --shadow-glow-lg: 0 0 0 1px oklch(0.82 0.16 195 / 0.35), 0 16px 56px -12px oklch(0.82 0.16 195 / 0.5);
+
+  /* Animasyonlar */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 40s linear infinite;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-drift: drift 18s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  /* Hero'daki su/dalga katmanının yavaş salınımı */
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.05);
+    }
+    50% {
+      transform: translate3d(-2%, -1.5%, 0) scale(1.12);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sticky navbar'ın anchor başlıkları kesmemesi için */
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Başlıklarda tek kelimelik son satırı önler — Türkçe uzun bileşik
+     kelimelerde belirgin fark yaratır. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  /* Klavye kullanıcısı için görünür odak; fare tıklamasında görünmez. */
+  :focus-visible {
+    @apply outline-primary outline-2 outline-offset-2;
+  }
+
+  /* Teknik metrikler: rakamlar sütun hâlinde hizalansın */
+  .tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--input);
+  }
+}
+
+@layer utilities {
+  /* Derin deniz zemini: iki noktasal ışık kaynağı, sayfa üstünde ışık sızıntısı */
+  .bg-abyss {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.82 0.16 195 / 0.12), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 85% 10%, oklch(0.68 0.2 250 / 0.1), transparent 70%);
+  }
+
+  /* Bölüm ayracı olarak ince turkuaz çizgi */
+  .rule-glow {
+    background-image: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.35;
+  }
+}
+
+/* Hareket hassasiyeti olan kullanıcılar için tüm animasyonlar durur.
+   Framer Motion ayrıca useReducedMotion() ile kontrol edilir. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

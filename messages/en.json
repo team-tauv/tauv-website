@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "vehicles": "Vehicles",
+    "competitions": "Competitions",
+    "sponsors": "Sponsors",
+    "news": "Blog",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "hero": {
+    "titleFallback": "Turkish-German University Unmanned Underwater Systems Team",
+    "taglineFallback": "Future in the depth, depth in the future.",
+    "ctaVehicles": "Explore Our Vehicles",
+    "ctaSponsor": "Become a Sponsor",
+    "scrollHint": "Scroll down"
+  },
+  "home": {
+    "featuredEyebrow": "Featured Vehicle",
+    "featuredCta": "View vehicle",
+    "vehiclesAll": "All vehicles",
+    "sponsorsEyebrow": "Supported By",
+    "sponsorsTitle": "Our Sponsors",
+    "sponsorsEmpty": "Our sponsor list will appear here soon.",
+    "newsEyebrow": "Blog",
+    "newsTitle": "Latest Posts",
+    "newsAll": "All posts",
+    "newsEmpty": "No posts published yet."
+  },
+  "news": {
+    "eyebrow": "Journal",
+    "title": "Blog",
+    "description": "Team updates, competition logs and technical write-ups.",
+    "empty": "No posts published yet.",
+    "backToList": "All posts",
+    "relatedVehicle": "Related Vehicle"
+  },
+  "about": {
+    "eyebrow": "The Team",
+    "title": "About Us",
+    "description": "A student team working on underwater robotics at the Turkish-German University.",
+    "mission": "Mission",
+    "vision": "Vision"
+  },
+  "team": {
+    "eyebrow": "Members",
+    "title": "Our Team",
+    "description": "Students working across five departments, from mechanical design to autonomy software.",
+    "all": "All",
+    "filterLabel": "Filter by department",
+    "empty": "The team roster will appear here soon."
+  },
+  "competitions": {
+    "eyebrow": "In the Field",
+    "title": "Competitions & Achievements",
+    "description": "From TEKNOFEST to the TAC Challenge — the events we enter and the results we bring back.",
+    "empty": "Competition entries will appear here soon.",
+    "rankLabel": "Rank {rank}",
+    "technicalReport": "Technical report (PDF)"
+  },
+  "contact": {
+    "eyebrow": "Get in Touch",
+    "title": "Contact",
+    "description": "Sponsorship, collaboration or joining the team — whichever it is, write to us.",
+    "emailHeading": "Email",
+    "addressHeading": "Address",
+    "socialHeading": "Social Media",
+    "mapHeading": "Location",
+    "recruitmentHeading": "Recruitment",
+    "recruitmentClosed": "Applications are currently closed. Follow our social accounts so you don't miss the next call.",
+    "recruitmentOpenFallback": "Applications are open. Use the link below to fill in the form.",
+    "applyNow": "Apply",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send",
+      "sending": "Sending…",
+      "success": "Your message has been sent. We'll get back to you shortly."
+    },
+    "errors": {
+      "nameMin": "Your name must be at least 2 characters.",
+      "nameMax": "Name can be at most 80 characters.",
+      "emailInvalid": "Enter a valid email address.",
+      "subjectMin": "Subject must be at least 3 characters.",
+      "subjectMax": "Subject can be at most 120 characters.",
+      "messageMin": "Your message must be at least 20 characters.",
+      "messageMax": "Message can be at most 4000 characters.",
+      "validation": "Some fields are missing or invalid.",
+      "notConfigured": "The form is currently unavailable. Please email us directly.",
+      "sendFailed": "Could not send the message. Please try again or email us."
+    }
+  },
+  "sponsors": {
+    "eyebrow": "Our Supporters",
+    "title": "Sponsors",
+    "description": "The organisations whose support puts our vehicles in the water.",
+    "empty": "Our sponsor list will appear here soon.",
+    "becomeTitle": "Become a Sponsor",
+    "becomeFallback": "Supporting our team means investing directly in engineering education and in underwater technology. Get in touch for our sponsorship packages.",
+    "downloadDeck": "Sponsorship Deck (PDF)",
+    "contactUs": "Get in touch"
+  },
+  "vehicle": {
+    "listEyebrow": "Fleet",
+    "listTitle": "Our Vehicles",
+    "listDescription": "From design to fabrication, pool tests to the competition site — the autonomous and remotely operated underwater vehicles we build.",
+    "empty": "Vehicle entries will appear here soon.",
+    "backToList": "All vehicles",
+    "specs": "Specifications",
+    "gallery": "Gallery",
+    "render3d": "3D Model",
+    "competitions": "Competitions Entered",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "goToImage": "Go to image {number}",
+    "detail": "View details",
+    "type": "Type",
+    "year": "Year",
+    "status": {
+      "active": "Active",
+      "development": "In development",
+      "retired": "Retired"
+    }
+  },
+  "departments": {
+    "mechanical": "Mechanical",
+    "software": "Software",
+    "autonomy": "Autonomy",
+    "electronics": "Electronics",
+    "media": "Media & Sponsorship"
+  },
+  "tiers": {
+    "main": "Main Sponsor",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "supplier": "Supplier"
+  },
+  "member": {
+    "linkedinLabel": "{name} — LinkedIn profile",
+    "lead": "Team Lead"
+  },
+  "footer": {
+    "tagline": "The unmanned underwater systems team of the Turkish-German University.",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Türkçeye geç"
+  },
+  "common": {
+    "readMore": "Read more",
+    "loading": "Loading…",
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The page you are looking for may have moved or never existed.",
+    "backHome": "Back to home"
+  },
+  "metadata": {
+    "siteName": "TAUV",
+    "defaultTitle": "TAUV — Unmanned Underwater Systems Team",
+    "defaultDescription": "The Unmanned Underwater Systems Team of the Turkish-German University. We design and build autonomous underwater vehicles and compete at TEKNOFEST and the TAC Challenge."
+  }
+}

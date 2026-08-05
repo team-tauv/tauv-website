@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "vehicles": "Araçlarımız",
+    "competitions": "Yarışmalar",
+    "sponsors": "Sponsorlar",
+    "news": "Blog",
+    "contact": "İletişim",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "skipToContent": "İçeriğe geç"
+  },
+  "hero": {
+    "titleFallback": "Türk-Alman Üniversitesi İnsansız Su Altı Sistemleri Takımı",
+    "taglineFallback": "Derinlikte gelecek, gelecekte derinlik.",
+    "ctaVehicles": "Araçlarımızı İnceleyin",
+    "ctaSponsor": "Sponsor Olun",
+    "scrollHint": "Aşağı kaydırın"
+  },
+  "home": {
+    "featuredEyebrow": "Öne Çıkan Araç",
+    "featuredCta": "Aracı incele",
+    "vehiclesAll": "Tüm araçlar",
+    "sponsorsEyebrow": "Bizi Destekleyenler",
+    "sponsorsTitle": "Sponsorlarımız",
+    "sponsorsEmpty": "Sponsor listesi yakında burada olacak.",
+    "newsEyebrow": "Blog",
+    "newsTitle": "Son Yazılar",
+    "newsAll": "Tüm yazılar",
+    "newsEmpty": "Henüz yayımlanmış bir yazı yok."
+  },
+  "news": {
+    "eyebrow": "Günlük",
+    "title": "Blog",
+    "description": "Takımın çalışmaları, yarışma günlükleri ve teknik yazılar.",
+    "empty": "Henüz yayımlanmış bir yazı yok.",
+    "backToList": "Tüm yazılar",
+    "relatedVehicle": "İlgili Araç"
+  },
+  "about": {
+    "eyebrow": "Takım",
+    "title": "Hakkımızda",
+    "description": "Türk-Alman Üniversitesi bünyesinde su altı robotiği üzerine çalışan öğrenci takımı.",
+    "mission": "Misyon",
+    "vision": "Vizyon"
+  },
+  "team": {
+    "eyebrow": "Ekip",
+    "title": "Takım Üyelerimiz",
+    "description": "Mekanikten otonom yazılıma, beş departmanda çalışan öğrenciler.",
+    "all": "Tümü",
+    "filterLabel": "Departmana göre filtrele",
+    "empty": "Takım listesi yakında burada olacak."
+  },
+  "competitions": {
+    "eyebrow": "Sahada",
+    "title": "Yarışmalar & Başarılar",
+    "description": "TEKNOFEST'ten TAC Challenge'a, katıldığımız organizasyonlar ve aldığımız dereceler.",
+    "empty": "Yarışma kayıtları yakında burada olacak.",
+    "rankLabel": "{rank}. sıra",
+    "technicalReport": "Teknik rapor (PDF)"
+  },
+  "contact": {
+    "eyebrow": "Bize Ulaşın",
+    "title": "İletişim",
+    "description": "Sponsorluk, iş birliği veya takıma katılma — hangisi olursa olsun yazın.",
+    "emailHeading": "E-posta",
+    "addressHeading": "Adres",
+    "socialHeading": "Sosyal Medya",
+    "mapHeading": "Konum",
+    "recruitmentHeading": "Üye Alımı",
+    "recruitmentClosed": "Şu anda başvuru dönemi kapalı. Yeni dönem duyurusunu kaçırmamak için sosyal medya hesaplarımızı takip edin.",
+    "recruitmentOpenFallback": "Başvurular açık. Aşağıdaki bağlantıdan formu doldurabilirsiniz.",
+    "applyNow": "Başvur",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "subject": "Konu",
+      "message": "Mesajınız",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor…",
+      "success": "Mesajınız iletildi. En kısa sürede dönüş yapacağız."
+    },
+    "errors": {
+      "nameMin": "Adınız en az 2 karakter olmalı.",
+      "nameMax": "Ad en fazla 80 karakter olabilir.",
+      "emailInvalid": "Geçerli bir e-posta adresi girin.",
+      "subjectMin": "Konu en az 3 karakter olmalı.",
+      "subjectMax": "Konu en fazla 120 karakter olabilir.",
+      "messageMin": "Mesajınız en az 20 karakter olmalı.",
+      "messageMax": "Mesaj en fazla 4000 karakter olabilir.",
+      "validation": "Formda eksik veya hatalı alanlar var.",
+      "notConfigured": "Form şu anda devre dışı. Lütfen doğrudan e-posta ile yazın.",
+      "sendFailed": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya e-posta ile yazın."
+    }
+  },
+  "sponsors": {
+    "eyebrow": "Destekçilerimiz",
+    "title": "Sponsorlarımız",
+    "description": "Araçlarımızı suya indiren desteğin arkasındaki kurumlar.",
+    "empty": "Sponsor listesi yakında burada olacak.",
+    "becomeTitle": "Sponsorumuz Olun",
+    "becomeFallback": "Takımımıza destek olmak, mühendislik eğitimine ve Türkiye'nin su altı teknolojilerine doğrudan yatırım yapmak demek. Sponsorluk paketlerimiz için bizimle iletişime geçin.",
+    "downloadDeck": "Sponsorluk Dosyası (PDF)",
+    "contactUs": "İletişime geçin"
+  },
+  "vehicle": {
+    "listEyebrow": "Filo",
+    "listTitle": "Araçlarımız",
+    "listDescription": "Tasarımdan üretime, havuz testlerinden yarışma sahasına — ürettiğimiz otonom ve uzaktan kumandalı su altı araçları.",
+    "empty": "Araç kayıtları yakında burada olacak.",
+    "backToList": "Tüm araçlar",
+    "specs": "Teknik Özellikler",
+    "gallery": "Galeri",
+    "render3d": "3B Model",
+    "competitions": "Katıldığı Yarışmalar",
+    "prevImage": "Önceki görsel",
+    "nextImage": "Sonraki görsel",
+    "goToImage": "{number}. görsele git",
+    "detail": "Detayları gör",
+    "type": "Tip",
+    "year": "Yıl",
+    "status": {
+      "active": "Aktif",
+      "development": "Geliştiriliyor",
+      "retired": "Emekli"
+    }
+  },
+  "departments": {
+    "mechanical": "Mekanik",
+    "software": "Yazılım",
+    "autonomy": "Otonom",
+    "electronics": "Elektronik",
+    "media": "Medya & Sponsorluk"
+  },
+  "tiers": {
+    "main": "Ana Sponsor",
+    "gold": "Altın",
+    "silver": "Gümüş",
+    "bronze": "Bronz",
+    "supplier": "Tedarik"
+  },
+  "member": {
+    "linkedinLabel": "{name} — LinkedIn profili",
+    "lead": "Ekip Lideri"
+  },
+  "footer": {
+    "tagline": "Türk-Alman Üniversitesi bünyesinde faaliyet gösteren insansız su altı sistemleri takımı.",
+    "quickLinks": "Hızlı Bağlantılar",
+    "followUs": "Bizi Takip Edin",
+    "rights": "Tüm hakları saklıdır.",
+    "backToTop": "Başa dön"
+  },
+  "language": {
+    "label": "Dil",
+    "switchTo": "Switch to English"
+  },
+  "common": {
+    "readMore": "Devamını oku",
+    "loading": "Yükleniyor…",
+    "notFoundTitle": "Sayfa bulunamadı",
+    "notFoundBody": "Aradığınız sayfa taşınmış veya hiç var olmamış olabilir.",
+    "backHome": "Ana sayfaya dön"
+  },
+  "metadata": {
+    "siteName": "TAUV",
+    "defaultTitle": "TAUV — İnsansız Su Altı Sistemleri Takımı",
+    "defaultDescription": "Türk-Alman Üniversitesi İnsansız Su Altı Sistemleri Takımı. Otonom su altı araçları tasarlıyor, üretiyor ve TEKNOFEST ile TAC Challenge'da yarışıyoruz."
+  }
+}
