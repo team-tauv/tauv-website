@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { SanityImageCropped } from "@/components/shared/sanity-image";
+import { OceanWaves } from "@/components/home/ocean-waves";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/types/sanity.types";
 
 type HeroProps = {
@@ -46,10 +47,14 @@ export function Hero({ title, tagline, videoUrl, poster }: HeroProps) {
 
         {/* Alt kenara doğru koyulaşan perde — metin her zaman okunur kalsın. */}
         <div className="from-background via-background/70 absolute inset-0 bg-gradient-to-t to-transparent" />
+
+        {/* Okyanus dalgaları perdenin üstünde: video/poster varken de görünür,
+            CMS boşken tek başına zemini taşır. */}
+        <OceanWaves />
       </div>
 
       <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
+        <div className="mx-auto max-w-5xl text-center">
           <p className="text-primary animate-fade-up font-mono text-xs font-bold tracking-[0.25em] uppercase">
             TEKNOFEST · TAC Challenge
           </p>
@@ -62,7 +67,7 @@ export function Hero({ title, tagline, videoUrl, poster }: HeroProps) {
             {tagline ?? t("taglineFallback")}
           </p>
 
-          <div className="animate-fade-up mt-10 flex flex-wrap gap-3">
+          <div className="animate-fade-up mt-10 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
               <Link href="/vehicles">
                 {t("ctaVehicles")}

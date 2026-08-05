@@ -169,6 +169,46 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Okyanus dalgaları (components/home/ocean-waves.tsx).
+
+   Bilerek `@theme` DIŞINDA: oradaki @keyframes'ler yalnızca karşılık gelen
+   --animate-* utility'si sınıf olarak kullanılınca çıktıya yazılır. Bu üçü
+   inline style'dan (her katman farklı süre/yön) çağrıldığı için Tailwind
+   kullanıldıklarını göremez ve @theme içinde kalsalar elenirler.
+
+   Desen katman genişliği boyunca 4 kez tekrar ediyor; -%25 kayma tam bir
+   periyoda denk geldiği için döngü dikişsiz. Kayma miktarı bilerek küçük:
+   katman kapsayıcıdan geniş, böylece blur'un yumuşattığı yan kenarlar
+   döngünün hiçbir anında görünür alana girmiyor.
+--------------------------------------------------------------------------- */
+@keyframes wave-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+@keyframes wave-slide-reverse {
+  from {
+    transform: translate3d(-25%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+/* Yatay kaymayla asal süreler kullanılır — desen göze tekrar etmez. */
+@keyframes wave-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 6%, 0);
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
