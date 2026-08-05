@@ -28,8 +28,21 @@ export type NavVehicle = NAV_VEHICLES_QUERY_RESULT[number];
 const linkClass =
   "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors outline-none focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2";
 
+/**
+ * Panel açılış/kapanış animasyonu CSS ile yapılıyor: Radix, Content'i
+ * data-state="closed" iken hemen sökmüyor, süren bir animasyon varsa bitmesini
+ * bekliyor. Bu yüzden Framer Motion'a gerek yok.
+ *
+ * Açılış kapanıştan biraz uzun (200ms / 150ms): menüler arasında gezinirken
+ * kapanışın çabuk olması gecikme hissini azaltıyor. Ölçek merkezi sol üst,
+ * yani tetikleyicinin dibi — panel oradan büyüyor gibi görünsün diye.
+ */
 const panelClass =
-  "border-border bg-background/95 shadow-glow absolute top-full left-0 mt-2 rounded-xl border p-2 backdrop-blur-xl";
+  "border-border bg-background/95 shadow-glow absolute top-full left-0 mt-2 origin-top-left rounded-xl border p-2 backdrop-blur-xl " +
+  "data-[state=open]:animate-in data-[state=open]:duration-200 data-[state=open]:ease-[cubic-bezier(0.16,1,0.3,1)] " +
+  "data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-top-2 " +
+  "data-[state=closed]:animate-out data-[state=closed]:duration-150 data-[state=closed]:ease-in " +
+  "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-top-1";
 
 const itemClass =
   "block rounded-lg px-3 py-2.5 text-sm transition-colors outline-none hover:bg-accent focus-visible:bg-accent";
@@ -84,7 +97,7 @@ export function DesktopNav({ vehicles }: { vehicles: NavVehicle[] }) {
               <NavigationMenu.Trigger className={cn(linkClass, "group", triggerTone(item.href))}>
                 {t(item.label)}
                 <ChevronDown
-                  className="size-3.5 transition-transform group-data-[state=open]:rotate-180"
+                  className="size-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180"
                   aria-hidden
                 />
               </NavigationMenu.Trigger>
