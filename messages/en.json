@@ -48,7 +48,7 @@
   "team": {
     "eyebrow": "Members",
     "title": "Our Team",
-    "description": "Students working across five departments, from mechanical design to autonomy software.",
+    "description": "Our teams from mechanical design to organisation, and the mentors who guide them.",
     "all": "All",
     "filterLabel": "Filter by department",
     "empty": "The team roster will appear here soon."
@@ -129,10 +129,10 @@
   },
   "departments": {
     "mechanical": "Mechanical",
-    "software": "Software",
-    "autonomy": "Autonomy",
     "electronics": "Electronics",
-    "media": "Media & Sponsorship"
+    "software": "Software",
+    "organization": "Organisation",
+    "mentors": "Mentors"
   },
   "tiers": {
     "main": "Main Sponsor",
@@ -147,6 +147,8 @@
   },
   "footer": {
     "tagline": "The unmanned underwater systems team of the Turkish-German University.",
+    "university": "Turkish-German University",
+    "universityAddress": "Şahinkaya Cad. No: 106, 34820 Beykoz / Istanbul, Türkiye",
     "quickLinks": "Quick Links",
     "followUs": "Follow Us",
     "rights": "All rights reserved.",

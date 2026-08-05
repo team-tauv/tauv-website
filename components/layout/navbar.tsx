@@ -92,10 +92,10 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <LanguageSwitcher className="hidden sm:flex" />
           <Button asChild size="sm" className="hidden lg:inline-flex">
             <Link href="/sponsors">{tHero("ctaSponsor")}</Link>
           </Button>
+          <LanguageSwitcher className="hidden sm:flex" />
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}

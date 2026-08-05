@@ -1,7 +1,9 @@
+import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SocialIcon } from "@/components/shared/social-icon";
-import { NAV_ITEMS, SOCIAL_ICON_LABELS } from "@/lib/constants";
+import { FOOTER_ITEMS, resolveSocials, UNIVERSITY_URL } from "@/lib/constants";
+import { SOCIAL_PLATFORM_LABELS } from "@/lib/taxonomy";
 import { Logo } from "./logo";
 
 type FooterProps = {
@@ -14,9 +16,7 @@ export function Footer({ socials, contactEmail }: FooterProps) {
   const tNav = useTranslations("nav");
   const year = new Date().getFullYear();
 
-  const links = (socials ?? []).filter(
-    (s): s is { platform: string; url: string } => Boolean(s.platform && s.url),
-  );
+  const links = resolveSocials(socials);
 
   return (
     <footer className="border-border bg-surface/30 mt-24 border-t">
@@ -24,23 +24,43 @@ export function Footer({ socials, contactEmail }: FooterProps) {
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
           <div>
             <Logo size={44} />
-            <p className="text-muted-foreground mt-4 max-w-sm text-sm leading-relaxed">
+
+            <p className="text-muted-foreground mt-5 max-w-sm text-sm leading-relaxed">
               {t("tagline")}
             </p>
-            {contactEmail ? (
+
+            {/* Kurum ve iletişim bilgisi tek blokta.
+                <address> kullanılıyor çünkü içeriğin kendisi bir iletişim
+                adresi — ekran okuyucular ve arama motorları bunu düz bir
+                paragraftan ayırt ediyor. */}
+            <address className="mt-6 space-y-1.5 not-italic">
               <a
-                href={`mailto:${contactEmail}`}
-                className="text-primary mt-4 inline-block font-mono text-sm hover:underline"
+                href={UNIVERSITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground hover:text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
               >
-                {contactEmail}
+                {t("university")}
+                <ExternalLink className="size-3.5" aria-hidden />
               </a>
-            ) : null}
+              <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
+                {t("universityAddress")}
+              </p>
+              {contactEmail ? (
+                <a
+                  href={`mailto:${contactEmail}`}
+                  className="text-primary inline-block font-mono text-sm hover:underline"
+                >
+                  {contactEmail}
+                </a>
+              ) : null}
+            </address>
           </div>
 
           <div>
             <h2 className="text-sm font-bold tracking-wide uppercase">{t("quickLinks")}</h2>
             <ul className="mt-4 space-y-2.5">
-              {NAV_ITEMS.map((item) => (
+              {FOOTER_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -56,17 +76,28 @@ export function Footer({ socials, contactEmail }: FooterProps) {
           {links.length > 0 ? (
             <div>
               <h2 className="text-sm font-bold tracking-wide uppercase">{t("followUs")}</h2>
-              <ul className="mt-4 flex flex-wrap gap-2">
+              {/* Platform adı görünür olduğu için ikona aria-label gerekmiyor —
+                  SocialIcon zaten aria-hidden, ad bağlantının metni.
+
+                  Satır yüksekliği sabitlendi (`h-6` + `leading-none`): ikonlar
+                  aynı kutuda olsa da LinkedIn'in kenarlıklı "in" işareti ile
+                  SVG'lerin doğal yükseklikleri birebir aynı değil, `space-y`
+                  ile bırakıldığında satır araları gözle görülür biçimde
+                  eşitsizleşiyordu. Sabit yükseklik + `gap` bunu tamamen
+                  içeriğe bağımlı olmaktan çıkarıyor. */}
+              <ul className="mt-4 flex flex-col gap-3">
                 {links.map((social) => (
-                  <li key={social.platform}>
+                  <li key={social.platform} className="flex">
                     <a
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={SOCIAL_ICON_LABELS[social.platform] ?? social.platform}
-                      className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-10 items-center justify-center rounded-lg border transition-colors"
+                      className="text-muted-foreground hover:text-primary flex h-6 items-center gap-2.5 text-sm leading-none transition-colors"
                     >
-                      <SocialIcon platform={social.platform} />
+                      <span className="flex size-4 shrink-0 items-center justify-center">
+                        <SocialIcon platform={social.platform} />
+                      </span>
+                      {SOCIAL_PLATFORM_LABELS[social.platform]}
                     </a>
                   </li>
                 ))}

@@ -1,4 +1,5 @@
 import type { StructureResolver } from "sanity/structure";
+import { DEPARTMENTS } from "../lib/taxonomy";
 
 /**
  * Studio sol menüsü. Varsayılan otomatik liste yerine elle kuruluyor ki
@@ -32,15 +33,9 @@ export const structure: StructureResolver = (S) =>
                 .title("Tümü")
                 .child(S.documentTypeList("member").title("Tüm Üyeler")),
               S.divider(),
-              ...(
-                [
-                  ["mechanical", "Mekanik"],
-                  ["software", "Yazılım"],
-                  ["autonomy", "Otonom"],
-                  ["electronics", "Elektronik"],
-                  ["media", "Medya & Sponsorluk"],
-                ] as const
-              ).map(([value, title]) =>
+              // Liste lib/taxonomy.ts'ten geliyor — burada elle tekrarlanırsa
+              // departman eklendiğinde Studio menüsü sessizce eksik kalır.
+              ...DEPARTMENTS.map(({ value, title }) =>
                 S.listItem()
                   .title(title)
                   .id(value)

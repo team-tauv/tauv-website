@@ -31,7 +31,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   news,
 ];
 
-// Departman / katman / araç tipi listeleri artık lib/taxonomy.ts'te —
+// Departman / katman / araç tipi / sosyal platform listeleri lib/taxonomy.ts'te —
 // hem şemalar hem site bileşenleri oradan okuyor. Buradan tekrar yaymıyoruz
 // ki "iki kaynak" izlenimi doğmasın.
-export { SOCIAL_PLATFORMS } from "./objects/socialLink";

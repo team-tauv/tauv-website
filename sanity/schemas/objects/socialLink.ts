@@ -1,13 +1,5 @@
 import { defineField, defineType } from "sanity";
-
-export const SOCIAL_PLATFORMS = [
-  { title: "Instagram", value: "instagram" },
-  { title: "LinkedIn", value: "linkedin" },
-  { title: "X (Twitter)", value: "x" },
-  { title: "YouTube", value: "youtube" },
-  { title: "GitHub", value: "github" },
-  { title: "E-posta", value: "email" },
-] as const;
+import { SOCIAL_PLATFORMS } from "../../../lib/taxonomy";
 
 export const socialLink = defineType({
   name: "socialLink",
@@ -25,6 +17,7 @@ export const socialLink = defineType({
       name: "url",
       title: "Bağlantı",
       type: "url",
+      description: 'E-posta seçtiyseniz "mailto:" ile başlatın.',
       validation: (rule) => rule.required().uri({ scheme: ["http", "https", "mailto"] }),
     }),
   ],

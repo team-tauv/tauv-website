@@ -184,7 +184,7 @@ export type Member = {
   _rev: string;
   name?: string;
   role?: InternationalizedArrayString;
-  department?: "mechanical" | "software" | "autonomy" | "electronics" | "media";
+  department?: "mechanical" | "electronics" | "software" | "organization" | "mentors";
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -312,7 +312,8 @@ export type SpecItem = {
 
 export type SocialLink = {
   _type: "socialLink";
-  platform?: "instagram" | "linkedin" | "x" | "youtube" | "github" | "email";
+  platform?:
+    "instagram" | "linkedin" | "tiktok" | "linktree" | "youtube" | "x" | "github" | "email";
   url?: string;
 };
 
@@ -641,7 +642,7 @@ export type VEHICLE_BY_SLUG_QUERY_RESULT = {
 export type MEMBERS_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
-  department: "autonomy" | "electronics" | "mechanical" | "media" | "software" | null;
+  department: "electronics" | "mechanical" | "mentors" | "organization" | "software" | null;
   isLead: boolean | null;
   role: string | null;
   image: {
@@ -916,7 +917,16 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   address: string | null;
   mapEmbedUrl: string | null;
   socials: Array<{
-    platform: "email" | "github" | "instagram" | "linkedin" | "x" | "youtube" | null;
+    platform:
+      | "email"
+      | "github"
+      | "instagram"
+      | "linkedin"
+      | "linktree"
+      | "tiktok"
+      | "x"
+      | "youtube"
+      | null;
     url: string | null;
   }> | null;
   defaultSeo: {

@@ -13,12 +13,13 @@
  * sanity sızmasın diye.
  */
 
+/** Sıra önemli: Studio menüsü ve site sekmeleri bu sırayla dizilir. */
 export const DEPARTMENTS = [
   { value: "mechanical", title: "Mekanik" },
-  { value: "software", title: "Yazılım" },
-  { value: "autonomy", title: "Otonom" },
   { value: "electronics", title: "Elektronik" },
-  { value: "media", title: "Medya & Sponsorluk" },
+  { value: "software", title: "Yazılım" },
+  { value: "organization", title: "Organizasyon" },
+  { value: "mentors", title: "Mentörler" },
 ] as const;
 
 export type Department = (typeof DEPARTMENTS)[number]["value"];
@@ -42,3 +43,29 @@ export const VEHICLE_TYPES = [
   { value: "AUV", title: "AUV — Otonom Su Altı Aracı" },
   { value: "ROV", title: "ROV — Uzaktan Kumandalı Araç" },
 ] as const;
+
+/** Sıra önemli: footer ve iletişim sayfasında bu sırayla dizilir. */
+export const SOCIAL_PLATFORMS = [
+  { value: "instagram", title: "Instagram" },
+  { value: "linkedin", title: "LinkedIn" },
+  { value: "tiktok", title: "TikTok" },
+  { value: "linktree", title: "Linktree" },
+  { value: "youtube", title: "YouTube" },
+  { value: "x", title: "X (Twitter)" },
+  { value: "github", title: "GitHub" },
+  { value: "email", title: "E-posta" },
+] as const;
+
+export type SocialPlatform = (typeof SOCIAL_PLATFORMS)[number]["value"];
+
+export const SOCIAL_PLATFORM_VALUES = SOCIAL_PLATFORMS.map(
+  (p) => p.value,
+) as readonly SocialPlatform[];
+
+export const SOCIAL_PLATFORM_LABELS = Object.fromEntries(
+  SOCIAL_PLATFORMS.map((p) => [p.value, p.title]),
+) as Record<SocialPlatform, string>;
+
+export function isSocialPlatform(value: unknown): value is SocialPlatform {
+  return typeof value === "string" && (SOCIAL_PLATFORM_VALUES as readonly string[]).includes(value);
+}

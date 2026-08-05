@@ -4,7 +4,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { defaultLocale } from "@/lib/locales";
 import { FETCH_OPTIONS, sanityFetch } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
-import { SOCIAL_ICON_LABELS } from "@/lib/constants";
+import { resolveSocials } from "@/lib/constants";
+import { SOCIAL_PLATFORM_LABELS } from "@/lib/taxonomy";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { SocialIcon } from "@/components/shared/social-icon";
@@ -29,13 +30,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
     ...FETCH_OPTIONS,
   });
 
-  // platform alanı şemada bir enum; predicate'i `string` diye daraltmak
-  // gerçekte olandan geniş bir tip iddia ederdi.
-  type Social = NonNullable<NonNullable<typeof data>["socials"]>[number];
-  const socials = (data?.socials ?? []).filter(
-    (s): s is Social & { platform: NonNullable<Social["platform"]>; url: string } =>
-      Boolean(s.platform && s.url),
-  );
+  // CMS boşsa geçici bağlantılara düşer; footer ile aynı mantık.
+  const socials = resolveSocials(data?.socials);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -86,7 +82,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={SOCIAL_ICON_LABELS[social.platform] ?? social.platform}
+                      aria-label={SOCIAL_PLATFORM_LABELS[social.platform]}
                       className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-10 items-center justify-center rounded-lg border transition-colors"
                     >
                       <SocialIcon platform={social.platform} />

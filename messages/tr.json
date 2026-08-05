@@ -48,7 +48,7 @@
   "team": {
     "eyebrow": "Ekip",
     "title": "Takım Üyelerimiz",
-    "description": "Mekanikten otonom yazılıma, beş departmanda çalışan öğrenciler.",
+    "description": "Mekanikten organizasyona uzanan ekiplerimiz ve bize yol gösteren mentörlerimiz.",
     "all": "Tümü",
     "filterLabel": "Departmana göre filtrele",
     "empty": "Takım listesi yakında burada olacak."
@@ -129,10 +129,10 @@
   },
   "departments": {
     "mechanical": "Mekanik",
-    "software": "Yazılım",
-    "autonomy": "Otonom",
     "electronics": "Elektronik",
-    "media": "Medya & Sponsorluk"
+    "software": "Yazılım",
+    "organization": "Organizasyon",
+    "mentors": "Mentörler"
   },
   "tiers": {
     "main": "Ana Sponsor",
@@ -147,6 +147,8 @@
   },
   "footer": {
     "tagline": "Türk-Alman Üniversitesi bünyesinde faaliyet gösteren insansız su altı sistemleri takımı.",
+    "university": "Türk-Alman Üniversitesi",
+    "universityAddress": "Şahinkaya Cad. No: 106, 34820 Beykoz / İstanbul",
     "quickLinks": "Hızlı Bağlantılar",
     "followUs": "Bizi Takip Edin",
     "rights": "Tüm hakları saklıdır.",

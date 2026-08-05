@@ -1,4 +1,12 @@
-import { siGithub, siInstagram, siX, siYoutube, type SimpleIcon } from "simple-icons";
+import {
+  siGithub,
+  siInstagram,
+  siLinktree,
+  siTiktok,
+  siX,
+  siYoutube,
+  type SimpleIcon,
+} from "simple-icons";
 import { Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -8,16 +16,17 @@ import { cn } from "@/lib/utils";
  * lucide-react v1 marka ikonlarını ticari marka gerekçesiyle tamamen kaldırdı,
  * bu yüzden path verisi simple-icons'tan (CC0) geliyor.
  *
- * LinkedIn istisna: simple-icons kataloğundan da kaldırıldı, herhangi bir
- * pakette resmî path yok. Path'i ezberden yazmak yanlış bir glif üretme riski
- * taşıdığı için bunun yerine tipografik "in" işareti kullanılıyor.
- * LinkedIn'in resmî SVG'sini brand.linkedin.com'dan indirip public/ altına
- * koyarsanız burada onunla değiştirilebilir.
+ * LinkedIn istisna: simple-icons kataloğundan da kaldırıldı, hiçbir pakette
+ * resmî path yok. Path'i ezberden yazmak yanlış bir glif üretme riski taşıdığı
+ * için tipografik "in" işareti kullanılıyor. Resmî SVG'yi brand.linkedin.com'dan
+ * indirip public/ altına koyarsanız burada onunla değiştirilebilir.
  */
 const BRAND_ICONS: Record<string, SimpleIcon> = {
   instagram: siInstagram,
-  github: siGithub,
+  tiktok: siTiktok,
+  linktree: siLinktree,
   youtube: siYoutube,
+  github: siGithub,
   x: siX,
 };
 
