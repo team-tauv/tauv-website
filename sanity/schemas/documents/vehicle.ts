@@ -106,11 +106,30 @@ export const vehicle = defineType({
       options: { layout: "grid" },
     }),
     defineField({
+      name: "model3d",
+      title: "3B model dosyası (.glb)",
+      type: "file",
+      group: "media",
+      options: { accept: ".glb,.gltf" },
+      description:
+        "Sitede döndürülebilir model. CAD'den değil, Blender'da sadeleştirilip GLB olarak dışa aktarılmış dosya yüklenmeli — 10 MB üzeri dosyalar mobilde açılmaz.",
+    }),
+    defineField({
+      name: "modelPoster",
+      title: "3B model kapak görseli",
+      type: "image",
+      group: "media",
+      description:
+        "Model yüklenene kadar gösterilir. Boş bırakılırsa kapak görseli kullanılır. Modelin varsayılan açısından alınmış bir kare idealdir.",
+      hidden: ({ parent }) => !parent?.model3d?.asset,
+    }),
+    defineField({
       name: "renderUrl",
       title: "3D render bağlantısı",
       type: "url",
       group: "media",
-      description: "Sketchfab vb. gömülebilir model adresi. İsteğe bağlı.",
+      description:
+        "Sketchfab vb. gömülebilir model adresi. Yalnızca yukarıya GLB yüklenmediğinde kullanılır.",
       validation: (rule) => rule.uri({ scheme: ["https"] }),
     }),
 

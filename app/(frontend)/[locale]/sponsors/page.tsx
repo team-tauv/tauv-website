@@ -4,11 +4,19 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { defaultLocale } from "@/lib/locales";
 import { FETCH_OPTIONS, sanityFetch } from "@/sanity/lib/live";
-import { SITE_SETTINGS_QUERY, SPONSORS_QUERY } from "@/sanity/lib/queries";
+import {
+  ACHIEVEMENTS_QUERY,
+  SITE_SETTINGS_QUERY,
+  SPONSORS_QUERY,
+  SPONSORSHIP_PACKAGES_QUERY,
+} from "@/sanity/lib/queries";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { PortableText } from "@/components/shared/portable-text";
+import { StatsBand } from "@/components/home/stats-band";
+import { Achievements } from "@/components/sponsors/achievements";
 import { SponsorGrid } from "@/components/sponsors/sponsor-grid";
+import { SponsorshipPackages } from "@/components/sponsors/sponsorship-packages";
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -25,9 +33,11 @@ export default async function SponsorsPage(props: { params: Promise<{ locale: st
   const t = await getTranslations({ locale, namespace: "sponsors" });
   const params = { locale, defaultLocale };
 
-  const [sponsors, settings] = await Promise.all([
+  const [sponsors, settings, packages, achievements] = await Promise.all([
     sanityFetch({ query: SPONSORS_QUERY, params, ...FETCH_OPTIONS }),
     sanityFetch({ query: SITE_SETTINGS_QUERY, params, ...FETCH_OPTIONS }),
+    sanityFetch({ query: SPONSORSHIP_PACKAGES_QUERY, params, ...FETCH_OPTIONS }),
+    sanityFetch({ query: ACHIEVEMENTS_QUERY, params, ...FETCH_OPTIONS }),
   ]);
 
   const data = settings.data;
@@ -36,7 +46,26 @@ export default async function SponsorsPage(props: { params: Promise<{ locale: st
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
+      {/* Kanıt önce, rica sonra: sponsor bu sayfayı "karşılığında ne var"
+          sorusuyla okuyor — metrikler ve dereceler paketlerden önce gelmeli. */}
+      {data?.sponsorshipStats?.length ? (
+        <div className="mt-12">
+          <StatsBand stats={data.sponsorshipStats} variant="card" />
+        </div>
+      ) : null}
+
       <SponsorGrid sponsors={sponsors.data} />
+
+      <Achievements achievements={achievements.data} />
+
+      <section className="mt-24">
+        <SectionHeading
+          eyebrow={t("packagesEyebrow")}
+          title={t("packagesTitle")}
+          description={t("packagesDescription")}
+        />
+        <SponsorshipPackages packages={packages.data} />
+      </section>
 
       <section className="border-border bg-surface mt-24 rounded-2xl border p-8 sm:p-12">
         <div className="max-w-2xl">

@@ -12,6 +12,7 @@ içerik Sanity.io headless CMS'ten gelir.
 | Stil       | Tailwind CSS v4 (CSS-first `@theme`) + shadcn/ui    |
 | Animasyon  | Framer Motion                                       |
 | CMS        | Sanity v6 (`/studio` altında gömülü Studio)         |
+| 3B         | `@google/model-viewer` (glTF/GLB, WebXR ile mobil AR) |
 | i18n       | next-intl (TR varsayılan / EN) + Sanity alan bazlı çeviri |
 | Form       | React Hook Form + Zod + Resend                      |
 | Barındırma | Vercel                                              |
@@ -36,6 +37,9 @@ npm run dev
 | `npm run typecheck`    | `tsc --noEmit` ile tip kontrolü                 |
 | `npm run lint`         | ESLint                                          |
 | `npm run sanity:typegen` | Şemalardan TypeScript tipleri üret            |
+| `npm run model:optimize` | GLB'yi web'e uygun boyuta indir (bkz. 3B araç modeli) |
+| `npm run model:inspect`  | GLB içeriğini incele (vertex, doku, sıkıştırma) |
+| `npm run sanity:seed:packages` | Sponsorluk paketlerini sponsorluk dosyasındaki tablodan Sanity'ye yaz (var olan kayıtlara dokunmaz) |
 
 ## Rotalar
 
@@ -48,9 +52,9 @@ Dosya sistemindeki segment adları İngilizcedir; kullanıcıya görünen URL
 | `[locale]/page`               | `/`                | `/en`                 | Hero, metrikler, öne çıkan araç, sponsorlar, haberler |
 | `[locale]/about`              | `/hakkimizda`      | `/en/about`           | Misyon/vizyon + departmana göre ekip |
 | `[locale]/vehicles`           | `/araclar`         | `/en/vehicles`        | Araç listesi |
-| `[locale]/vehicles/[slug]`    | `/araclar/nemo`    | `/en/vehicles/nemo`   | Teknik tablo, galeri |
+| `[locale]/vehicles/[slug]`    | `/araclar/nemo`    | `/en/vehicles/nemo`   | Teknik tablo, galeri, 3B model |
 | `[locale]/competitions`       | `/yarismalar`      | `/en/competitions`    | Zaman çizelgesi, dereceler |
-| `[locale]/sponsors`           | `/sponsorlar`      | `/en/sponsors`        | Katmanlı logo matrisi + PDF |
+| `[locale]/sponsors`           | `/sponsorlar`      | `/en/sponsors`        | Erişim metrikleri, katmanlı logo matrisi, başarılar, sponsorluk paketleri, PDF |
 | `[locale]/news`               | `/haberler`        | `/en/news`            | Duyuru listesi |
 | `[locale]/news/[slug]`        | `/haberler/...`    | `/en/news/...`        | Haber detayı |
 | `[locale]/contact`            | `/iletisim`        | `/en/contact`         | Form, konum, üye alımı |
@@ -66,3 +70,113 @@ Dosya sistemindeki segment adları İngilizcedir; kullanıcıya görünen URL
 - **Eksik çeviri** → EN alanı boşsa TR içerik gösterilir (fallback), sayfa boş kalmaz.
 - **Link verirken** `next/link` değil `@/i18n/navigation` içindeki `Link`
   kullanılır; aksi hâlde locale kaybolur.
+
+## 3B araç modeli
+
+Araç detay sayfasında modelin döndürülüp incelenebildiği bölüm. Sürükle-döndür,
+kaydır-yakınlaştır, 3 sn hareketsizlikten sonra otomatik dönüş; mobilde AR
+(Android Scene Viewer / iOS Quick Look).
+
+### Nasıl çalışır
+
+| Parça | Yer |
+| ----- | --- |
+| Sanity alanları | `sanity/schemas/documents/vehicle.ts` → `model3d`, `modelPoster`, `renderUrl` |
+| Sorgu | `sanity/lib/queries.ts` → `VEHICLE_BY_SLUG_QUERY` içinde `model3dUrl`, `modelPoster` |
+| Bileşen | `components/vehicles/vehicle-model-viewer.tsx` |
+| JSX tipleri | `types/model-viewer.d.ts` (`<model-viewer>` bir web component, React tanımaz) |
+| Kullanım | `app/(frontend)/[locale]/vehicles/[slug]/page.tsx` |
+
+Kaynak seçimi sırayla: **`model3d`** (kendi GLB'miz) → **`renderUrl`** (Sketchfab
+vb. iframe yedeği) → hiçbiri yoksa bölüm çizilmez.
+
+**Performans.** `@google/model-viewer` three.js taşıdığı için ~1 MB ve import
+edildiği anda `window`a dokunur — bu yüzden bileşen `"use client"` ve kütüphaneyi
+effect içinde `await import()` ile alır. Import bir `IntersectionObserver`'a
+bağlıdır (`rootMargin: 400px`): ziyaretçi 3B bölüme yaklaşmadan ne kütüphane ne
+de GLB indirilir. Modeli olmayan araç sayfaları hiçbir maliyet ödemez.
+
+### GLB dosyası nasıl hazırlanır
+
+Studio'da araç → **Görseller** sekmesindeki "3B model dosyası (.glb)" alanına
+**CAD dosyası doğrudan yüklenmez.** Ham CAD 200 MB'ı bulur ve mobilde açılmaz.
+
+#### 0. Önce CAD'de temizle
+
+Formattan önce gelen adım budur ve en büyük boyut kazancını burası verir.
+SolidWorks'te bir **Display State / Configuration** oluşturup vidaları,
+somunları, iç kabloları, kartları — dışarıdan görünmeyen her şeyi gizleyin,
+ihracı o konfigürasyondan alın. Blender'da 400 parçalık bir ağaçtan tek tek
+ayıklamaktan kat kat hızlı ve geri dönülebilir.
+
+#### 1. CAD'den ihraç: FBX (önerilen)
+
+**Save As → FBX**, Options altında _deviation_ ve _angle tolerance_ değerlerini
+kısarak. CAD tessellation'ı üçgeni eğriliğin olduğu yere koyar: düz plakaya iki
+üçgen, kubbeye binlerce. Blender'daki Decimate ise kenarları körlemesine
+çökertip kubbeleri düzleştirir, silindirleri köşelendirir — yani **poligonu
+baştan doğru yoğunlukta çıkarmak, sonradan düşürmekten iyidir.**
+
+Diğer seçenekler:
+
+| Format | Durum |
+| ------ | ----- |
+| **FBX** | Önerilen. Parça hiyerarşisini, isimleri, malzemeleri ve transformları korur. İleride parçaya tıklanabilir hotspot eklemek istenirse bu ağaç gerekir. |
+| **GLB** | SolidWorks 2022+ doğrudan `.glb` verebiliyor. Malzemeler ham kalır ama Blender'ı atlayıp modelin sitede nasıl durduğunu hızlıca görmek için ideal. |
+| **STEP** | B-rep taşır, mesh yoğunluğuna sonradan karar verilir. Ama Blender STEP'i native açamaz (_STEPper_ eklentisi veya FreeCAD üzerinden dolaşmak gerekir) ve import sırasındaki tessellation genelde CAD'inkinden kötüdür. Yalnızca yoğunlukla defalarca oynanacaksa değer. |
+| **OBJ** | Kullanmayın. Hiyerarşi yok (araç tek mesh'e düşer, parça isimleri kaybolur), birim metadata'sı yok, ASCII olduğu için dosya devasa. |
+
+#### 2. Blender'da düzenle
+
+1. **Ölçeği düzelt** — CAD mm, glTF metre ile çalışır; model 1000 kat büyük
+   gelir. `S 0.001` sonra Ctrl+A → Scale. Atlanırsa model-viewer'da kamera
+   modelin içinde kalır.
+2. **Artakalanları sil** — CAD'de gözden kaçan iç parçalar.
+3. **Malzeme ata** — CAD'den gelen model gri gelir. Gövde / kubbe / itki motoru
+   için birkaç basit Principled BSDF (metallic + roughness) yeter, doku haritası
+   şart değil.
+
+Blender'da Decimate ile uğraşmayın; poligon düşürme işini 3. adımdaki betik
+meshoptimizer ile hata sınırı içinde yapıyor.
+
+#### 3. Optimize et — Blender export'u doğrudan yüklenmez
+
+**Export → glTF 2.0 (.glb)** (Draco kutusunu işaretlemenize gerek yok, betik
+zaten uyguluyor), sonra:
+
+```bash
+npm run model:optimize -- indirilen.glb altay-web.glb
+npm run model:inspect -- altay-web.glb      # ne çıktığını görmek için
+```
+
+`scripts/optimize-model.mjs` iki geçiş yapar ve **sırası önemlidir**:
+
+1. **`prune --keep-attributes false`** — CAD modelinde doku yoktur ama Blender
+   yine de her vertex'e `TEXCOORD_0` yazar. İşe yaramayan bu UV'ler vertex
+   başına 8 bayt ve boşuna GPU belleği demektir.
+2. **`optimize --compress draco`** — dedup → instance → join → weld → simplify →
+   Draco. Draco'lu bir dosyaya sonradan `prune` uygulanırsa sıkıştırma çözülür ve
+   yeniden kurulmaz, dosya 15 katına çıkar. Sıra bu yüzden sabittir.
+
+Gerçek ölçüm (Altay, Blender glTF export'u):
+
+| | Ham export | Betikten sonra |
+| --- | --- | --- |
+| Dosya | 89 MB | **1,29 MB** |
+| Vertex | 2.405.252 | 482.975 |
+| Draco | yok | var |
+| `TEXCOORD_0` | var (kullanılmıyor) | atıldı |
+
+**Hedef: 10 MB altı.** Aşarsanız `--error` değerini büyütün (varsayılan `0.001`;
+`0.005` gözle görülür bozulma yapmadan epey kırpar) veya 0. adıma dönüp CAD'de
+daha çok iç parça gizleyin:
+
+```bash
+npm run model:optimize -- indirilen.glb altay-web.glb --error 0.005
+```
+
+#### 4. Poster
+
+`modelPoster` alanına modelin varsayılan açısından alınmış bir kare koyun —
+model inerken o görsel gösterilir, boş kutu görünmez. Boş bırakılırsa kapak
+görseli kullanılır.

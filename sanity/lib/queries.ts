@@ -80,6 +80,8 @@ export const VEHICLE_BY_SLUG_QUERY = defineQuery(`
   *[_type == "vehicle" && slug.current == $slug][0] {
     ${VEHICLE_CARD},
     renderUrl,
+    "model3dUrl": model3d.asset->url,
+    modelPoster{${IMAGE}},
     "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),
     "specs": specs[]{
       "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),
@@ -137,6 +139,22 @@ export const SPONSOR_MARQUEE_QUERY = defineQuery(`
   }
 `);
 
+/**
+ * Katman sırası GROQ'ta değil, bileşende lib/taxonomy.ts'teki TIER_VALUES ile
+ * veriliyor — "main, platinum, gold…" alfabetik de sayısal da değil, tek doğru
+ * sıra o listede.
+ */
+export const SPONSORSHIP_PACKAGES_QUERY = defineQuery(`
+  *[_type == "sponsorshipPackage"] {
+    _id,
+    tier,
+    featured,
+    "priceLabel": coalesce(priceLabel[language == $locale][0].value, priceLabel[language == $defaultLocale][0].value),
+    "benefits": coalesce(benefits[language == $locale][0].value, benefits[language == $defaultLocale][0].value),
+    "note": coalesce(note[language == $locale][0].value, note[language == $defaultLocale][0].value)
+  }
+`);
+
 /* ------------------------------ Yarışma --------------------------------- */
 
 export const COMPETITIONS_QUERY = defineQuery(`
@@ -155,6 +173,22 @@ export const COMPETITIONS_QUERY = defineQuery(`
     "technicalReport": technicalReport.asset->url,
     "vehiclesUsed": vehiclesUsed[]->{ _id, title, "slug": slug.current }
   }
+`);
+
+/**
+ * Sponsorluk sayfasındaki "Başarılarımız" vitrini. Yarışma zaman çizelgesinden
+ * farkı: yalnızca derece girilmiş kayıtlar geliyor ve ağır alanlar (görsel,
+ * açıklama, rapor) çekilmiyor — burada amaç anlatmak değil, kanıt sıralamak.
+ */
+export const ACHIEVEMENTS_QUERY = defineQuery(`
+  *[_type == "competition" && defined(result[language == $defaultLocale][0].value)]
+    | order(date desc)[0...6] {
+      _id,
+      name,
+      year,
+      rank,
+      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)
+    }
 `);
 
 /* -------------------------------- Haber --------------------------------- */
@@ -212,6 +246,11 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     teamPhoto{${IMAGE}},
     "sponsorshipPitch": coalesce(sponsorshipPitch[language == $locale][0].value, sponsorshipPitch[language == $defaultLocale][0].value),
     "sponsorshipDeck": sponsorshipDeck.asset->url,
+    "sponsorshipStats": sponsorshipStats[]{
+      value,
+      suffix,
+      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value)
+    },
     recruitmentOpen,
     "recruitmentNotice": coalesce(recruitmentNotice[language == $locale][0].value, recruitmentNotice[language == $defaultLocale][0].value),
     recruitmentUrl,

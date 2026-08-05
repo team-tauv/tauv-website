@@ -30,13 +30,19 @@ export function isDepartment(value: unknown): value is Department {
   return typeof value === "string" && (DEPARTMENT_VALUES as readonly string[]).includes(value);
 }
 
-/** Sıra önemli: sponsor grid'i bu sırayla bölümlenir. */
+/**
+ * Sıra önemli: sponsor grid'i ve sponsorluk paketi kartları bu sırayla
+ * bölümlenir. Katmanlar sponsorluk dosyasındaki bütçe aralıklarına karşılık
+ * gelir; tutarlar Studio'daki "Sponsorluk Paketi" dokümanından girilir, burada
+ * tutulmaz — sezona göre değişirler.
+ */
 export const SPONSOR_TIERS = [
   { value: "main", title: "Ana Sponsor" },
+  { value: "platinum", title: "Platin" },
   { value: "gold", title: "Altın" },
   { value: "silver", title: "Gümüş" },
   { value: "bronze", title: "Bronz" },
-  { value: "supplier", title: "Tedarik" },
+  { value: "supplier", title: "Ürün / Tedarik" },
 ] as const;
 
 export type SponsorTier = (typeof SPONSOR_TIERS)[number]["value"];

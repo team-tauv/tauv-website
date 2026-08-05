@@ -107,7 +107,14 @@
     "becomeTitle": "Sponsorumuz Olun",
     "becomeFallback": "Takımımıza destek olmak, mühendislik eğitimine ve Türkiye'nin su altı teknolojilerine doğrudan yatırım yapmak demek. Sponsorluk paketlerimiz için bizimle iletişime geçin.",
     "downloadDeck": "Sponsorluk Dosyası (PDF)",
-    "contactUs": "İletişime geçin"
+    "contactUs": "İletişime geçin",
+    "packagesEyebrow": "Sponsorluk paketleri",
+    "packagesTitle": "Hangi katmanda ne sunuyoruz",
+    "packagesDescription": "Bütçe aralıkları sezonluk destek tutarlarıdır. Ürün ve hizmet destekleri, piyasa değeri üzerinden aynı katmanlara denk sayılır.",
+    "packagePriceOnRequest": "Görüşmeye açık",
+    "achievementsTitle": "Başarılarımız",
+    "achievementsDescription": "Sponsorlarımızın logosu bu derecelerin kazanıldığı araçların ve sunumların üzerinde yer aldı.",
+    "achievementsLink": "Tüm yarışma geçmişi →"
   },
   "vehicle": {
     "listEyebrow": "Filo",
@@ -118,6 +125,10 @@
     "specs": "Teknik Özellikler",
     "gallery": "Galeri",
     "render3d": "3B Model",
+    "model3dLoading": "3B model yükleniyor…",
+    "model3dError": "3B model yüklenemedi.",
+    "model3dHint": "Döndürmek için sürükleyin, yakınlaştırmak için kaydırın.",
+    "model3dReset": "Görünümü sıfırla",
     "competitions": "Katıldığı Yarışmalar",
     "prevImage": "Önceki görsel",
     "nextImage": "Sonraki görsel",
@@ -140,10 +151,11 @@
   },
   "tiers": {
     "main": "Ana Sponsor",
+    "platinum": "Platin",
     "gold": "Altın",
     "silver": "Gümüş",
     "bronze": "Bronz",
-    "supplier": "Tedarik"
+    "supplier": "Ürün Sponsoru"
   },
   "member": {
     "linkedinLabel": "{name} — LinkedIn profili",

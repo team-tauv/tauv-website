@@ -49,7 +49,10 @@ export const structure: StructureResolver = (S) =>
             ]),
         ),
 
+      S.divider(),
+
       S.documentTypeListItem("sponsor").title("Sponsorlar"),
+      S.documentTypeListItem("sponsorshipPackage").title("Sponsorluk Paketleri"),
     ]);
 
 /** Tekil dokümanlar için "yeni oluştur" ve "sil" eylemlerini kapatır. */

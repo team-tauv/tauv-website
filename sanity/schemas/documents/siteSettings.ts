@@ -105,6 +105,18 @@ export const siteSettings = defineType({
       group: "sponsorship",
       options: { accept: ".pdf" },
     }),
+    defineField({
+      name: "sponsorshipStats",
+      title: "Erişim metrikleri",
+      type: "array",
+      group: "sponsorship",
+      of: [defineArrayMember({ type: "statItem" })],
+      description:
+        "Sponsorluk sayfasının üstündeki kanıt bandı. Ana sayfadakinden ayrı tutuluyor: " +
+        "burada sponsora hitap eden sayılar olmalı — kurulduğu yıl, kazanılan ödül, " +
+        "sosyal medya erişimi, aktif üye. 3–4 tane ideal.",
+      validation: (rule) => rule.max(4),
+    }),
 
     defineField({
       name: "recruitmentOpen",

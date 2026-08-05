@@ -107,7 +107,14 @@
     "becomeTitle": "Become a Sponsor",
     "becomeFallback": "Supporting our team means investing directly in engineering education and in underwater technology. Get in touch for our sponsorship packages.",
     "downloadDeck": "Sponsorship Deck (PDF)",
-    "contactUs": "Get in touch"
+    "contactUs": "Get in touch",
+    "packagesEyebrow": "Sponsorship packages",
+    "packagesTitle": "What each tier includes",
+    "packagesDescription": "Budget ranges are per season. In-kind product and service support is credited to the same tiers based on market value.",
+    "packagePriceOnRequest": "Open to discussion",
+    "achievementsTitle": "Our results",
+    "achievementsDescription": "Our sponsors' logos travelled on the vehicles and presentations that earned these results.",
+    "achievementsLink": "Full competition history →"
   },
   "vehicle": {
     "listEyebrow": "Fleet",
@@ -118,6 +125,10 @@
     "specs": "Specifications",
     "gallery": "Gallery",
     "render3d": "3D Model",
+    "model3dLoading": "Loading 3D model…",
+    "model3dError": "The 3D model could not be loaded.",
+    "model3dHint": "Drag to rotate, scroll to zoom.",
+    "model3dReset": "Reset view",
     "competitions": "Competitions Entered",
     "prevImage": "Previous image",
     "nextImage": "Next image",
@@ -140,10 +151,11 @@
   },
   "tiers": {
     "main": "Main Sponsor",
+    "platinum": "Platinum",
     "gold": "Gold",
     "silver": "Silver",
     "bronze": "Bronze",
-    "supplier": "Supplier"
+    "supplier": "Product Sponsor"
   },
   "member": {
     "linkedinLabel": "{name} — LinkedIn profile",

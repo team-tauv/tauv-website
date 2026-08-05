@@ -12,6 +12,7 @@ import { SanityImageCropped } from "@/components/shared/sanity-image";
 import { PortableText } from "@/components/shared/portable-text";
 import { SpecTable } from "@/components/vehicles/spec-table";
 import { VehicleGallery } from "@/components/vehicles/vehicle-gallery";
+import { VehicleModelViewer } from "@/components/vehicles/vehicle-model-viewer";
 
 export async function generateStaticParams() {
   const { data } = await sanityFetch({
@@ -84,6 +85,15 @@ export default async function VehicleDetailPage(props: {
 
   const t = await getTranslations({ locale, namespace: "vehicle" });
 
+  // Model yüklenene kadar gösterilen kare. Ayrı poster girilmediyse kapak görseli.
+  const posterSource = vehicle.modelPoster?.asset ? vehicle.modelPoster : vehicle.mainImage;
+  const posterUrl = posterSource?.asset
+    ? urlFor({ _type: "image", asset: { _type: "reference", _ref: posterSource.asset._id } })
+        .width(1200)
+        .fit("max")
+        .url()
+    : undefined;
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <Link
@@ -139,7 +149,17 @@ export default async function VehicleDetailPage(props: {
             </div>
           ) : null}
 
-          {vehicle.renderUrl ? (
+          {/* Kendi GLB'miz varsa o kazanır; renderUrl yalnızca yedek (Sketchfab vb.). */}
+          {vehicle.model3dUrl ? (
+            <div className="mt-14">
+              <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
+              <VehicleModelViewer
+                src={vehicle.model3dUrl}
+                alt={`${vehicle.title ?? ""} — ${t("render3d")}`}
+                poster={posterUrl}
+              />
+            </div>
+          ) : vehicle.renderUrl ? (
             <div className="mt-14">
               <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
               <div className="border-border aspect-video overflow-hidden rounded-xl border">

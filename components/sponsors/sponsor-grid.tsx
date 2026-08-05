@@ -13,6 +13,7 @@ type Sponsors = SPONSORS_QUERY_RESULT;
  */
 const TIER_LAYOUT: Record<string, { grid: string; logo: string }> = {
   main: { grid: "grid-cols-1 sm:grid-cols-2", logo: "h-20 sm:h-24" },
+  platinum: { grid: "grid-cols-2 sm:grid-cols-3", logo: "h-18 sm:h-20" },
   gold: { grid: "grid-cols-2 sm:grid-cols-3", logo: "h-16" },
   silver: { grid: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4", logo: "h-12" },
   bronze: { grid: "grid-cols-3 sm:grid-cols-4 lg:grid-cols-5", logo: "h-10" },

@@ -11,6 +11,7 @@ import { member } from "./documents/member";
 import { news } from "./documents/news";
 import { siteSettings } from "./documents/siteSettings";
 import { sponsor } from "./documents/sponsor";
+import { sponsorshipPackage } from "./documents/sponsorshipPackage";
 import { vehicle } from "./documents/vehicle";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -27,6 +28,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   vehicle,
   member,
   sponsor,
+  sponsorshipPackage,
   competition,
   news,
 ];
