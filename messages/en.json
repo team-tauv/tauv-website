@@ -50,6 +50,10 @@
     "title": "Our Team",
     "description": "Our teams from mechanical design to organisation, and the mentors who guide them.",
     "all": "All",
+    "allDepartments": "Whole Team",
+    "backToTeam": "Back to team",
+    "departmentDescription": "Team members working in {department}.",
+    "departmentEmpty": "No members listed in this department yet.",
     "filterLabel": "Filter by department",
     "empty": "The team roster will appear here soon."
   },

@@ -20,6 +20,16 @@ export const routing = defineRouting({
       tr: "/hakkimizda",
       en: "/about",
     },
+    /**
+     * Departman detay sayfası. Slug olarak departman kodu (mechanical,
+     * electronics…) kullanılıyor; araç slug'larında olduğu gibi iki dilde
+     * ortak — dile göre ayrı slug, kanonik URL ve yönlendirme karmaşası
+     * getirir, kazancı yok.
+     */
+    "/about/[department]": {
+      tr: "/hakkimizda/[department]",
+      en: "/about/[department]",
+    },
     "/vehicles": {
       tr: "/araclar",
       en: "/vehicles",

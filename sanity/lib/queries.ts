@@ -50,6 +50,21 @@ export const VEHICLES_QUERY = defineQuery(`
   }
 `);
 
+/**
+ * Navbar açılır menüsü için sadeleştirilmiş liste — her sayfada çalıştığı için
+ * görsel ve teknik özellik gibi ağır alanlar kasıtlı olarak çekilmiyor.
+ */
+export const NAV_VEHICLES_QUERY = defineQuery(`
+  *[_type == "vehicle" && defined(slug.current)] | order(year desc, title asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    year,
+    type,
+    "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value)
+  }
+`);
+
 export const FEATURED_VEHICLE_QUERY = defineQuery(`
   *[_type == "vehicle" && featured == true] | order(year desc)[0] {
     ${VEHICLE_CARD}

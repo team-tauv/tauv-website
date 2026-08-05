@@ -26,6 +26,10 @@ export type Department = (typeof DEPARTMENTS)[number]["value"];
 
 export const DEPARTMENT_VALUES = DEPARTMENTS.map((d) => d.value) as readonly Department[];
 
+export function isDepartment(value: unknown): value is Department {
+  return typeof value === "string" && (DEPARTMENT_VALUES as readonly string[]).includes(value);
+}
+
 /** Sıra önemli: sponsor grid'i bu sırayla bölümlenir. */
 export const SPONSOR_TIERS = [
   { value: "main", title: "Ana Sponsor" },

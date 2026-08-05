@@ -50,6 +50,10 @@
     "title": "Takım Üyelerimiz",
     "description": "Mekanikten organizasyona uzanan ekiplerimiz ve bize yol gösteren mentörlerimiz.",
     "all": "Tümü",
+    "allDepartments": "Tüm Ekip",
+    "backToTeam": "Takıma dön",
+    "departmentDescription": "{department} ekibinde çalışan takım üyelerimiz.",
+    "departmentEmpty": "Bu departmanda henüz kayıtlı üye yok.",
     "filterLabel": "Departmana göre filtrele",
     "empty": "Takım listesi yakında burada olacak."
   },

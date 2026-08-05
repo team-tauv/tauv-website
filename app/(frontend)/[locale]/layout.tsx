@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { FETCH_OPTIONS, sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import { NAV_VEHICLES_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 /** Her iki dil de derleme anında üretilir — istek anında locale çözümlenmez. */
 export function generateStaticParams() {
@@ -50,19 +50,23 @@ export default async function LocaleLayout({
   // Statik render için zorunlu: bu çağrı olmadan sayfa dinamik moda düşer.
   setRequestLocale(locale);
 
-  const { data: settings } = await sanityFetch({
-    query: SITE_SETTINGS_QUERY,
-    params: { locale, defaultLocale },
-    ...FETCH_OPTIONS,
-  });
+  const queryParams = { locale, defaultLocale };
+
+  const [settings, navVehicles] = await Promise.all([
+    sanityFetch({ query: SITE_SETTINGS_QUERY, params: queryParams, ...FETCH_OPTIONS }),
+    sanityFetch({ query: NAV_VEHICLES_QUERY, params: queryParams, ...FETCH_OPTIONS }),
+  ]);
 
   return (
     <html lang={locale} className={`${fontVariables} dark`} suppressHydrationWarning>
       <body className="min-h-svh antialiased" id="top">
         <NextIntlClientProvider>
-          <Navbar />
+          <Navbar vehicles={navVehicles.data} />
           <main className="pt-18">{children}</main>
-          <Footer socials={settings?.socials} contactEmail={settings?.contactEmail} />
+          <Footer
+            socials={settings.data?.socials}
+            contactEmail={settings.data?.contactEmail}
+          />
           <Toaster
             theme="dark"
             position="bottom-right"

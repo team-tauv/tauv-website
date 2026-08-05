@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { locales, defaultLocale, type Locale } from "@/lib/locales";
+import { DEPARTMENT_VALUES } from "@/lib/taxonomy";
 import { FETCH_OPTIONS, sanityFetch } from "@/sanity/lib/live";
 import { NEWS_SLUGS_QUERY, VEHICLE_SLUGS_QUERY } from "@/sanity/lib/queries";
 
@@ -45,6 +46,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...STATIC_PAGES.map((href) => entry(href)),
+
+    /**
+     * Departman sayfaları yalnızca üst menünün açılır panelinden erişilebiliyor
+     * ve o panel açılmadan DOM'a girmiyor — yani tarayıcı robotları bu
+     * sayfaları bağlantı üzerinden bulamaz. Sitemap tek keşif yolu.
+     */
+    ...DEPARTMENT_VALUES.map((department) =>
+      entry({ pathname: "/about/[department]", params: { department } }),
+    ),
 
     ...vehicles.data
       .filter((item) => item.slug)
