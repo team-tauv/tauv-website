@@ -44,18 +44,15 @@ export default async function SponsorsPage(props: { params: Promise<{ locale: st
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
-
       {/* Sponsor bu sayfayı "karşılığında ne var" sorusuyla okuyor —
-          katman/karşılık tablosu en üstte, kanıt (metrikler, dereceler) altında. */}
-      <section className="mt-12">
-        <SectionHeading
-          eyebrow={t("packagesEyebrow")}
-          title={t("packagesTitle")}
-          description={t("packagesDescription")}
-        />
-        <SponsorshipPackages packages={packages.data} />
-      </section>
+          katman/karşılık tablosu en üstte, kanıt (metrikler, dereceler) altında.
+          "Destekçilerimiz" başlığı ise ait olduğu yerde: sponsor logolarının üstünde. */}
+      <SectionHeading
+        eyebrow={t("packagesEyebrow")}
+        title={t("packagesTitle")}
+        description={t("packagesDescription")}
+      />
+      <SponsorshipPackages packages={packages.data} />
 
       {data?.sponsorshipStats?.length ? (
         <div className="mt-24">
@@ -63,7 +60,10 @@ export default async function SponsorsPage(props: { params: Promise<{ locale: st
         </div>
       ) : null}
 
-      <SponsorGrid sponsors={sponsors.data} />
+      <section className="mt-24">
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+        <SponsorGrid sponsors={sponsors.data} />
+      </section>
 
       <Achievements achievements={achievements.data} />
 
