@@ -123,7 +123,8 @@
 
   /* Neon turkuaz parıltı — CTA ve kart hover'larında */
   --shadow-glow: 0 0 0 1px oklch(0.82 0.16 195 / 0.25), 0 8px 32px -8px oklch(0.82 0.16 195 / 0.35);
-  --shadow-glow-lg: 0 0 0 1px oklch(0.82 0.16 195 / 0.35), 0 16px 56px -12px oklch(0.82 0.16 195 / 0.5);
+  --shadow-glow-lg:
+    0 0 0 1px oklch(0.82 0.16 195 / 0.35), 0 16px 56px -12px oklch(0.82 0.16 195 / 0.5);
 
   /* Hareket — tek yumuşama eğrisi.
      Tailwind'in `transition-*` varsayılanını ezer (150ms / ease-in-out), böylece
@@ -284,6 +285,23 @@
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.82 0.16 195 / 0.12), transparent 70%),
       radial-gradient(ellipse 60% 40% at 85% 10%, oklch(0.68 0.2 250 / 0.1), transparent 70%);
+  }
+
+  /* Sponsor logosunu saf beyaz siluete çevirir.
+     brightness(0) her opak pikseli siyaha, invert(1) beyaza taşır — kaynak
+     hangi renk olursa olsun sonuç aynı. Filtreler alfa kanalına dokunmaz,
+     yani şeffaf arka plan şeffaf kalır. */
+  .logo-mono {
+    filter: brightness(0) invert(1);
+  }
+
+  /* Beyaz/açık zeminli, şeffaflığı olmayan logolar için (JPG taramalar).
+     SVG feColorMatrix parlaklığı alfaya çevirir: açık zemin şeffaflaşır,
+     koyu marka beyaz kalır. mix-blend-mode yerine gerçek şeffaflık, çünkü
+     blend modu şeridin transform'u yüzünden oluşan yığın bağlamında
+     zemini bulamıyor ve siyah dikdörtgen bırakıyordu. */
+  .logo-mono-key {
+    filter: url("#logo-key-white");
   }
 
   /* Bölüm ayracı olarak ince turkuaz çizgi */

@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { SPONSOR_TIERS } from "../../../lib/taxonomy";
+import { LOGO_MODES, SPONSOR_TIERS } from "../../../lib/taxonomy";
 
 export const sponsor = defineType({
   name: "sponsor",
@@ -17,9 +17,18 @@ export const sponsor = defineType({
       title: "Logo",
       type: "image",
       description:
-        "Tercihen şeffaf arka planlı SVG. Koyu zeminde okunur olmalı — gerekiyorsa açık renkli sürümü yükleyin.",
-      options: { accept: ".svg,.png,.webp" },
+        "Tercihen şeffaf arka planlı SVG veya PNG. Renkli ya da beyaz fonlu bir logo da yükleyebilirsiniz — sitede nasıl görüneceğini alttaki 'Logo görünümü' belirler.",
+      options: { accept: ".svg,.png,.webp,.jpg,.jpeg" },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "logoMode",
+      title: "Logo görünümü",
+      type: "string",
+      options: { list: [...LOGO_MODES], layout: "radio" },
+      initialValue: "mono",
+      description:
+        "Logo koyu zeminde beyaza çevrilir. Arka planı zaten şeffafsa ilk seçenek yeterli; beyaz/açık fonlu bir görsel yüklediyseniz ikinciyi seçin, açık zemin silinir. Ana sponsorun kurumsal renkleri şartsa 'Orijinal renkler'.",
     }),
     defineField({
       name: "tier",

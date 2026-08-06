@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 import { SanityImage } from "@/components/shared/sanity-image";
+import { logoModeClass } from "@/lib/taxonomy";
+import { cn } from "@/lib/utils";
 import type { SPONSOR_MARQUEE_QUERY_RESULT } from "@/types/sanity.types";
 
 type Sponsors = SPONSOR_MARQUEE_QUERY_RESULT;
@@ -30,13 +32,20 @@ export function SponsorMarquee({ sponsors }: { sponsors: Sponsors }) {
       <div className="relative mt-8 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
         <ul className="animate-marquee flex w-max items-center gap-16 hover:[animation-play-state:paused]">
           {track.map((sponsor, index) => {
+            const mono = logoModeClass(sponsor.logoMode);
             const content = (
               <SanityImage
                 image={sponsor.logo}
                 alt={sponsor.name ?? ""}
                 width={240}
                 sizes="200px"
-                className="h-10 w-auto opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                className={cn(
+                  "h-10 w-auto opacity-60 transition-opacity duration-300 hover:opacity-100",
+                  // Logo zaten tek renge indirgeniyorsa grayscale/hover renk
+                  // dönüşü anlamsız — üstelik iki utility de `filter`
+                  // yazdığı için birbirini eziyor.
+                  mono || "grayscale transition-all hover:grayscale-0",
+                )}
               />
             );
 

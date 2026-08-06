@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { SanityImage } from "@/components/shared/sanity-image";
 import { FadeIn } from "@/components/shared/fade-in";
-import { TIER_VALUES } from "@/lib/taxonomy";
+import { logoModeClass, TIER_VALUES } from "@/lib/taxonomy";
 import { cn } from "@/lib/utils";
 import type { SPONSORS_QUERY_RESULT } from "@/types/sanity.types";
 
@@ -60,6 +60,7 @@ export function SponsorGrid({ sponsors }: { sponsors: Sponsors }) {
                     className={cn(
                       "w-auto max-w-full object-contain opacity-75 transition-opacity group-hover:opacity-100",
                       layout.logo,
+                      logoModeClass(sponsor.logoMode),
                     )}
                   />
                 );

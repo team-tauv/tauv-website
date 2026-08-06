@@ -50,6 +50,34 @@ export type SponsorTier = (typeof SPONSOR_TIERS)[number]["value"];
 export const TIER_VALUES = SPONSOR_TIERS.map((t) => t.value) as readonly SponsorTier[];
 
 /**
+ * Sponsor logosunun sitede nasıl boyanacağı.
+ *
+ * Site tek temalı (koyu) ve logolar farklı kaynaklardan geliyor: kimi şeffaf
+ * SVG, kimi beyaz zeminli JPG, hepsi ayrı renkte. Hepsini olduğu gibi basmak
+ * şeridi alacalı gösteriyor, beyaz zeminliler ise koyu kartın ortasında beyaz
+ * dikdörtgen bırakıyor. Bu yüzden logo düzeyinde bir "boyama" seçimi var;
+ * karşılıkları globals.css'teki .logo-* yardımcı sınıfları.
+ */
+export const LOGO_MODES = [
+  { value: "mono", title: "Monokrom beyaz (şeffaf arka planlı logo)" },
+  { value: "monoOnLight", title: "Monokrom beyaz + açık zemini sil (beyaz fonlu logo)" },
+  { value: "original", title: "Orijinal renkler" },
+] as const;
+
+export type LogoMode = (typeof LOGO_MODES)[number]["value"];
+
+const LOGO_MODE_CLASS: Record<LogoMode, string> = {
+  mono: "logo-mono",
+  monoOnLight: "logo-mono-key",
+  original: "",
+};
+
+/** Studio'da alan boş bırakılmışsa (eski kayıtlar) varsayılan monokrom. */
+export function logoModeClass(mode?: string | null): string {
+  return LOGO_MODE_CLASS[(mode ?? "mono") as LogoMode] ?? "";
+}
+
+/**
  * Sıra önemli: üye formundaki menü bu sırayla dizilir. Serbest metin yerine
  * sabit liste, çünkü "3" / "3. sınıf" / "Üçüncü" gibi varyasyonlar aynı bilgiyi
  * farklı gösterir ve dillere çeviremezdik. Etiketler messages/*.json

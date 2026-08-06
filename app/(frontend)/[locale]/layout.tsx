@@ -11,6 +11,7 @@ import { defaultLocale, openGraphLocales, type Locale } from "@/lib/locales";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { LogoFilters } from "@/components/shared/logo-filters";
 import { FETCH_OPTIONS, sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { NAV_VEHICLES_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
@@ -60,13 +61,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${fontVariables} dark`} suppressHydrationWarning>
       <body className="min-h-svh antialiased" id="top">
+        <LogoFilters />
         <NextIntlClientProvider>
           <Navbar vehicles={navVehicles.data} />
           <main className="pt-18">{children}</main>
-          <Footer
-            socials={settings.data?.socials}
-            contactEmail={settings.data?.contactEmail}
-          />
+          <Footer socials={settings.data?.socials} contactEmail={settings.data?.contactEmail} />
           <Toaster
             theme="dark"
             position="bottom-right"

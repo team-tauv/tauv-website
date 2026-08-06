@@ -127,7 +127,8 @@ const SPONSOR_FIELDS = /* groq */ `
   name,
   tier,
   website,
-  logo{${IMAGE}}
+  logo{${IMAGE}},
+  logoMode
 `;
 
 export const SPONSORS_QUERY = defineQuery(`
