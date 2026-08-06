@@ -9,7 +9,12 @@ import { localeNames, type Locale } from "./locales";
  * sağlayıcıya geçmek istenirse değişecek tek yer `requestTranslations`.
  */
 
-const MODEL = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+/**
+ * Sürüm numarası yerine `-latest` takma adı: Google eski sürümleri yeni
+ * anahtarlara kapatıyor (gemini-2.5-flash bu yüzden 404 vermeye başladı) ve
+ * takma ad her zaman güncel flash modeline işaret ediyor.
+ */
+const MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-latest";
 
 /** Tek istekte gönderilen metin sayısı. Uzun dokümanlar parçalara bölünür. */
 const BATCH_SIZE = 60;
@@ -70,9 +75,10 @@ async function requestTranslations(texts: string[], target: Locale): Promise<str
           temperature: 0.2,
           responseMimeType: "application/json",
           responseSchema: { type: "ARRAY", items: { type: "STRING" } },
-          // Çeviri akıl yürütme gerektirmiyor; düşünme bütçesi kapalıyken
-          // hem belirgin biçimde hızlı hem de kotaya daha az yükleniyor.
-          thinkingConfig: { thinkingBudget: 0 },
+          // Çeviri akıl yürütme gerektirmiyor; en düşük düzey hem hızlı hem
+          // kotaya nazik. Gemini 3 sonrasında `thinkingBudget` yerine
+          // `thinkingLevel` bekleniyor — eskisi 400 döndürüyor.
+          thinkingConfig: { thinkingLevel: "minimal" },
         },
       }),
     },
