@@ -86,6 +86,7 @@ export const VEHICLE_BY_SLUG_QUERY = defineQuery(`
     "specs": specs[]{
       "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),
       "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),
+      icon,
       highlight
     },
     "gallery": gallery[]{

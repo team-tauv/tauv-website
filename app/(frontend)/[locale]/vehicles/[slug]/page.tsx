@@ -10,7 +10,7 @@ import { VEHICLE_BY_SLUG_QUERY, VEHICLE_SLUGS_QUERY } from "@/sanity/lib/queries
 import { urlFor } from "@/sanity/lib/image";
 import { SanityImageCropped } from "@/components/shared/sanity-image";
 import { PortableText } from "@/components/shared/portable-text";
-import { SpecTable } from "@/components/vehicles/spec-table";
+import { SpecCards } from "@/components/vehicles/spec-cards";
 import { VehicleGallery } from "@/components/vehicles/vehicle-gallery";
 import { VehicleModelViewer } from "@/components/vehicles/vehicle-model-viewer";
 
@@ -86,6 +86,8 @@ export default async function VehicleDetailPage(props: {
   const t = await getTranslations({ locale, namespace: "vehicle" });
 
   // Model yüklenene kadar gösterilen kare. Ayrı poster girilmediyse kapak görseli.
+  const hasSpecs = Boolean(vehicle.specs && vehicle.specs.length > 0);
+
   const posterSource = vehicle.modelPoster?.asset ? vehicle.modelPoster : vehicle.mainImage;
   const posterUrl = posterSource?.asset
     ? urlFor({ _type: "image", asset: { _type: "reference", _ref: posterSource.asset._id } })
@@ -127,15 +129,40 @@ export default async function VehicleDetailPage(props: {
       </header>
 
       {vehicle.mainImage?.asset ? (
-        <SanityImageCropped
-          image={vehicle.mainImage}
-          alt={vehicle.mainImage.alt || vehicle.title || ""}
-          width={1600}
-          height={900}
-          priority
-          sizes="(max-width: 1152px) 100vw, 1152px"
-          className="border-border mt-10 w-full rounded-xl border"
-        />
+        <div className="relative mt-10">
+          <SanityImageCropped
+            image={vehicle.mainImage}
+            alt={vehicle.mainImage.alt || vehicle.title || ""}
+            width={1600}
+            height={900}
+            priority
+            sizes="(max-width: 1152px) 100vw, 1152px"
+            className="border-border w-full rounded-xl border"
+          />
+
+          {/* Kartlar görselin üzerinde; dar ekranda sığmaz, orada görselin altına iner. */}
+          {hasSpecs ? (
+            <>
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-3/4 rounded-b-xl bg-linear-to-t from-black/85 via-black/50 to-transparent sm:block"
+                aria-hidden
+              />
+              <div className="absolute inset-x-0 bottom-0 hidden p-4 sm:block sm:p-6">
+                <h2 className="mb-3 text-xs font-bold tracking-wide text-white/70 uppercase">
+                  {t("specs")}
+                </h2>
+                <SpecCards specs={vehicle.specs} tone="overlay" />
+              </div>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      {hasSpecs ? (
+        <div className={vehicle.mainImage?.asset ? "mt-8 sm:hidden" : "mt-10"}>
+          <h2 className="mb-3 text-sm font-bold tracking-wide uppercase">{t("specs")}</h2>
+          <SpecCards specs={vehicle.specs} />
+        </div>
       ) : null}
 
       <div className="mt-16 grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
@@ -150,17 +177,10 @@ export default async function VehicleDetailPage(props: {
           ) : null}
         </div>
 
-        {/* Teknik veriler yan sütunda sabit kalır; uzun açıklamada kaybolmasın. */}
+        {/* Yarışma listesi yan sütunda sabit kalır; uzun açıklamada kaybolmasın. */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          {vehicle.specs && vehicle.specs.length > 0 ? (
-            <>
-              <h2 className="mb-4 text-sm font-bold tracking-wide uppercase">{t("specs")}</h2>
-              <SpecTable specs={vehicle.specs} />
-            </>
-          ) : null}
-
           {vehicle.competitions && vehicle.competitions.length > 0 ? (
-            <div className="mt-10">
+            <div>
               <h2 className="mb-4 text-sm font-bold tracking-wide uppercase">
                 {t("competitions")}
               </h2>

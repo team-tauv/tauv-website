@@ -341,6 +341,23 @@ export type SpecItem = {
   _type: "specItem";
   label?: InternationalizedArrayString;
   value?: InternationalizedArrayString;
+  icon?:
+    | "default"
+    | "weight"
+    | "dimensions"
+    | "depth"
+    | "speed"
+    | "thruster"
+    | "battery"
+    | "power"
+    | "runtime"
+    | "camera"
+    | "sensor"
+    | "computer"
+    | "comms"
+    | "material"
+    | "pressure"
+    | "software";
   highlight?: boolean;
 };
 
@@ -611,7 +628,7 @@ export type VEHICLE_SLUGS_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: VEHICLE_BY_SLUG_QUERY
-// Query: *[_type == "vehicle" && slug.current == $slug][0] {      _id,  title,  "slug": slug.current,  year,  type,  status,  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),  mainImage{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},  "highlights": specs[highlight == true][0...3]{    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)  },    renderUrl,    "model3dUrl": model3d.asset->url,    modelPoster{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),    "specs": specs[]{      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),      "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),      highlight    },    "gallery": gallery[]{        ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  },      "caption": coalesce(caption[language == $locale][0].value, caption[language == $defaultLocale][0].value)    },    "competitions": *[_type == "competition" && references(^._id)] | order(date desc) {      _id, name, year, rank,      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)    },      "seo": {    "title": coalesce(seo.title[language == $locale][0].value, seo.title[language == $defaultLocale][0].value),    "description": coalesce(seo.description[language == $locale][0].value, seo.description[language == $defaultLocale][0].value),    "ogImage": seo.ogImage{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},    "noIndex": coalesce(seo.noIndex, false)  }  }
+// Query: *[_type == "vehicle" && slug.current == $slug][0] {      _id,  title,  "slug": slug.current,  year,  type,  status,  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),  mainImage{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},  "highlights": specs[highlight == true][0...3]{    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)  },    renderUrl,    "model3dUrl": model3d.asset->url,    modelPoster{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),    "specs": specs[]{      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),      "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),      icon,      highlight    },    "gallery": gallery[]{        ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  },      "caption": coalesce(caption[language == $locale][0].value, caption[language == $defaultLocale][0].value)    },    "competitions": *[_type == "competition" && references(^._id)] | order(date desc) {      _id, name, year, rank,      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)    },      "seo": {    "title": coalesce(seo.title[language == $locale][0].value, seo.title[language == $defaultLocale][0].value),    "description": coalesce(seo.description[language == $locale][0].value, seo.description[language == $defaultLocale][0].value),    "ogImage": seo.ogImage{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},    "noIndex": coalesce(seo.noIndex, false)  }  }
 export type VEHICLE_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
@@ -654,6 +671,24 @@ export type VEHICLE_BY_SLUG_QUERY_RESULT = {
   specs: Array<{
     label: string | null;
     value: string | null;
+    icon:
+      | "battery"
+      | "camera"
+      | "comms"
+      | "computer"
+      | "default"
+      | "depth"
+      | "dimensions"
+      | "material"
+      | "power"
+      | "pressure"
+      | "runtime"
+      | "sensor"
+      | "software"
+      | "speed"
+      | "thruster"
+      | "weight"
+      | null;
     highlight: boolean | null;
   }> | null;
   gallery: Array<{
@@ -1047,7 +1082,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "vehicle" && defined(slug.current)] | order(year desc, title asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    year,\n    type,\n    "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value)\n  }\n': NAV_VEHICLES_QUERY_RESULT;
     '\n  *[_type == "vehicle" && featured == true] | order(year desc)[0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  year,\n  type,\n  status,\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),\n  mainImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n  "highlights": specs[highlight == true][0...3]{\n    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)\n  }\n\n  }\n': FEATURED_VEHICLE_QUERY_RESULT;
     '\n  *[_type == "vehicle" && defined(slug.current)]{ "slug": slug.current }\n': VEHICLE_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "vehicle" && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  year,\n  type,\n  status,\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),\n  mainImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n  "highlights": specs[highlight == true][0...3]{\n    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)\n  }\n,\n    renderUrl,\n    "model3dUrl": model3d.asset->url,\n    modelPoster{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),\n    "specs": specs[]{\n      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n      "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),\n      highlight\n    },\n    "gallery": gallery[]{\n      \n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n,\n      "caption": coalesce(caption[language == $locale][0].value, caption[language == $defaultLocale][0].value)\n    },\n    "competitions": *[_type == "competition" && references(^._id)] | order(date desc) {\n      _id, name, year, rank,\n      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)\n    },\n    \n  "seo": {\n    "title": coalesce(seo.title[language == $locale][0].value, seo.title[language == $defaultLocale][0].value),\n    "description": coalesce(seo.description[language == $locale][0].value, seo.description[language == $defaultLocale][0].value),\n    "ogImage": seo.ogImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "noIndex": coalesce(seo.noIndex, false)\n  }\n\n  }\n': VEHICLE_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "vehicle" && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  year,\n  type,\n  status,\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),\n  mainImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n  "highlights": specs[highlight == true][0...3]{\n    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)\n  }\n,\n    renderUrl,\n    "model3dUrl": model3d.asset->url,\n    modelPoster{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),\n    "specs": specs[]{\n      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n      "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),\n      icon,\n      highlight\n    },\n    "gallery": gallery[]{\n      \n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n,\n      "caption": coalesce(caption[language == $locale][0].value, caption[language == $defaultLocale][0].value)\n    },\n    "competitions": *[_type == "competition" && references(^._id)] | order(date desc) {\n      _id, name, year, rank,\n      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)\n    },\n    \n  "seo": {\n    "title": coalesce(seo.title[language == $locale][0].value, seo.title[language == $defaultLocale][0].value),\n    "description": coalesce(seo.description[language == $locale][0].value, seo.description[language == $defaultLocale][0].value),\n    "ogImage": seo.ogImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "noIndex": coalesce(seo.noIndex, false)\n  }\n\n  }\n': VEHICLE_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "member" && active == true]\n    | order(isLead desc, order asc, name asc) {\n      _id,\n      name,\n      department,\n      isLead,\n      "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),\n      "major": coalesce(major[language == $locale][0].value, major[language == $defaultLocale][0].value),\n      studyYear,\n      image{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n      linkedin,\n      github,\n      email\n    }\n': MEMBERS_QUERY_RESULT;
     '\n  *[_type == "sponsor"] | order(order asc, name asc) {\n    \n  _id,\n  name,\n  tier,\n  website,\n  logo{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n,\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value)\n  }\n': SPONSORS_QUERY_RESULT;
     '\n  *[_type == "sponsor" && showInMarquee == true] | order(order asc, name asc) {\n    \n  _id,\n  name,\n  tier,\n  website,\n  logo{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n\n  }\n': SPONSOR_MARQUEE_QUERY_RESULT;
