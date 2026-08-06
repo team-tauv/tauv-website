@@ -159,7 +159,19 @@
   },
   "member": {
     "linkedinLabel": "{name} — LinkedIn profili",
+    "githubLabel": "{name} — GitHub profili",
+    "emailLabel": "{name} — e-posta gönder",
     "lead": "Ekip Lideri"
+  },
+  "studyYears": {
+    "prep": "Hazırlık",
+    "1": "1. sınıf",
+    "2": "2. sınıf",
+    "3": "3. sınıf",
+    "4": "4. sınıf",
+    "msc": "Yüksek lisans",
+    "phd": "Doktora",
+    "alumni": "Mezun"
   },
   "footer": {
     "tagline": "Türk-Alman Üniversitesi bünyesinde faaliyet gösteren insansız su altı sistemleri takımı.",

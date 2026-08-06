@@ -49,6 +49,31 @@ export type SponsorTier = (typeof SPONSOR_TIERS)[number]["value"];
 
 export const TIER_VALUES = SPONSOR_TIERS.map((t) => t.value) as readonly SponsorTier[];
 
+/**
+ * Sıra önemli: üye formundaki menü bu sırayla dizilir. Serbest metin yerine
+ * sabit liste, çünkü "3" / "3. sınıf" / "Üçüncü" gibi varyasyonlar aynı bilgiyi
+ * farklı gösterir ve iki dilde çeviremezdik. Etiketler messages/*.json
+ * içindeki `studyYears.*` anahtarlarından gelir.
+ */
+export const STUDY_YEARS = [
+  { value: "prep", title: "Hazırlık" },
+  { value: "1", title: "1. sınıf" },
+  { value: "2", title: "2. sınıf" },
+  { value: "3", title: "3. sınıf" },
+  { value: "4", title: "4. sınıf" },
+  { value: "msc", title: "Yüksek lisans" },
+  { value: "phd", title: "Doktora" },
+  { value: "alumni", title: "Mezun" },
+] as const;
+
+export type StudyYear = (typeof STUDY_YEARS)[number]["value"];
+
+export const STUDY_YEAR_VALUES = STUDY_YEARS.map((y) => y.value) as readonly StudyYear[];
+
+export function isStudyYear(value: unknown): value is StudyYear {
+  return typeof value === "string" && (STUDY_YEAR_VALUES as readonly string[]).includes(value);
+}
+
 export const VEHICLE_TYPES = [
   { value: "AUV", title: "AUV — Otonom Su Altı Aracı" },
   { value: "ROV", title: "ROV — Uzaktan Kumandalı Araç" },

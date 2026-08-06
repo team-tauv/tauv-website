@@ -1,6 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { pickLocale, type IntlArray } from "../../lib/i18n";
-import { DEPARTMENTS } from "../../../lib/taxonomy";
+import { DEPARTMENTS, STUDY_YEARS } from "../../../lib/taxonomy";
 
 export const member = defineType({
   name: "member",
@@ -29,6 +29,18 @@ export const member = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "major",
+      title: "Bölüm",
+      type: "internationalizedArrayString",
+      description: 'Okuduğu bölüm. Örn. "Makine Mühendisliği" / "Mechanical Engineering".',
+    }),
+    defineField({
+      name: "studyYear",
+      title: "Sınıf",
+      type: "string",
+      options: { list: [...STUDY_YEARS] },
+    }),
+    defineField({
       name: "image",
       title: "Fotoğraf",
       type: "image",
@@ -48,6 +60,19 @@ export const member = defineType({
       title: "LinkedIn",
       type: "url",
       validation: (rule) => rule.uri({ scheme: ["https"] }),
+    }),
+    defineField({
+      name: "github",
+      title: "GitHub",
+      type: "url",
+      validation: (rule) => rule.uri({ scheme: ["https"] }),
+    }),
+    defineField({
+      name: "email",
+      title: "E-posta",
+      type: "string",
+      description: "Kartta doğrudan gösterilir; kişisel adres yerine takım adresini tercih edin.",
+      validation: (rule) => rule.email(),
     }),
     defineField({
       name: "isLead",
@@ -82,7 +107,13 @@ export const member = defineType({
     },
   ],
   preview: {
-    select: { title: "name", role: "role", department: "department", media: "image", active: "active" },
+    select: {
+      title: "name",
+      role: "role",
+      department: "department",
+      media: "image",
+      active: "active",
+    },
     prepare({ title, role, department, media, active }) {
       const dept = DEPARTMENTS.find((d) => d.value === department)?.title ?? "—";
       const roleText = pickLocale(role as IntlArray) ?? "";

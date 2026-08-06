@@ -110,8 +110,12 @@ export const MEMBERS_QUERY = defineQuery(`
       department,
       isLead,
       "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),
+      "major": coalesce(major[language == $locale][0].value, major[language == $defaultLocale][0].value),
+      studyYear,
       image{${IMAGE}},
-      linkedin
+      linkedin,
+      github,
+      email
     }
 `);
 

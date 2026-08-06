@@ -198,6 +198,8 @@ export type Member = {
   name?: string;
   role?: InternationalizedArrayString;
   department?: "mechanical" | "electronics" | "software" | "organization" | "mentors";
+  major?: InternationalizedArrayString;
+  studyYear?: "prep" | "1" | "2" | "3" | "4" | "msc" | "phd" | "alumni";
   image?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -207,6 +209,8 @@ export type Member = {
     _type: "image";
   };
   linkedin?: string;
+  github?: string;
+  email?: string;
   isLead?: boolean;
   active?: boolean;
   order?: number;
@@ -694,13 +698,15 @@ export type VEHICLE_BY_SLUG_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: MEMBERS_QUERY
-// Query: *[_type == "member" && active == true]    | order(isLead desc, order asc, name asc) {      _id,      name,      department,      isLead,      "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),      image{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},      linkedin    }
+// Query: *[_type == "member" && active == true]    | order(isLead desc, order asc, name asc) {      _id,      name,      department,      isLead,      "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),      "major": coalesce(major[language == $locale][0].value, major[language == $defaultLocale][0].value),      studyYear,      image{  ...,  "alt": coalesce(alt, ""),  asset->{    _id,    "lqip": metadata.lqip,    "dimensions": metadata.dimensions  }},      linkedin,      github,      email    }
 export type MEMBERS_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
   department: "electronics" | "mechanical" | "mentors" | "organization" | "software" | null;
   isLead: boolean | null;
   role: string | null;
+  major: string | null;
+  studyYear: "1" | "2" | "3" | "4" | "alumni" | "msc" | "phd" | "prep" | null;
   image: {
     asset: {
       _id: string;
@@ -714,6 +720,8 @@ export type MEMBERS_QUERY_RESULT = Array<{
     _type: "image";
   } | null;
   linkedin: string | null;
+  github: string | null;
+  email: string | null;
 }>;
 
 // Source: sanity/lib/queries.ts
@@ -1040,7 +1048,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "vehicle" && featured == true] | order(year desc)[0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  year,\n  type,\n  status,\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),\n  mainImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n  "highlights": specs[highlight == true][0...3]{\n    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)\n  }\n\n  }\n': FEATURED_VEHICLE_QUERY_RESULT;
     '\n  *[_type == "vehicle" && defined(slug.current)]{ "slug": slug.current }\n': VEHICLE_SLUGS_QUERY_RESULT;
     '\n  *[_type == "vehicle" && slug.current == $slug][0] {\n    \n  _id,\n  title,\n  "slug": slug.current,\n  year,\n  type,\n  status,\n  "tagline": coalesce(tagline[language == $locale][0].value, tagline[language == $defaultLocale][0].value),\n  mainImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n  "highlights": specs[highlight == true][0...3]{\n    "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n    "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value)\n  }\n,\n    renderUrl,\n    "model3dUrl": model3d.asset->url,\n    modelPoster{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),\n    "specs": specs[]{\n      "label": coalesce(label[language == $locale][0].value, label[language == $defaultLocale][0].value),\n      "value": coalesce(value[language == $locale][0].value, value[language == $defaultLocale][0].value),\n      highlight\n    },\n    "gallery": gallery[]{\n      \n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n,\n      "caption": coalesce(caption[language == $locale][0].value, caption[language == $defaultLocale][0].value)\n    },\n    "competitions": *[_type == "competition" && references(^._id)] | order(date desc) {\n      _id, name, year, rank,\n      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)\n    },\n    \n  "seo": {\n    "title": coalesce(seo.title[language == $locale][0].value, seo.title[language == $defaultLocale][0].value),\n    "description": coalesce(seo.description[language == $locale][0].value, seo.description[language == $defaultLocale][0].value),\n    "ogImage": seo.ogImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "noIndex": coalesce(seo.noIndex, false)\n  }\n\n  }\n': VEHICLE_BY_SLUG_QUERY_RESULT;
-    '\n  *[_type == "member" && active == true]\n    | order(isLead desc, order asc, name asc) {\n      _id,\n      name,\n      department,\n      isLead,\n      "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),\n      image{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n      linkedin\n    }\n': MEMBERS_QUERY_RESULT;
+    '\n  *[_type == "member" && active == true]\n    | order(isLead desc, order asc, name asc) {\n      _id,\n      name,\n      department,\n      isLead,\n      "role": coalesce(role[language == $locale][0].value, role[language == $defaultLocale][0].value),\n      "major": coalesce(major[language == $locale][0].value, major[language == $defaultLocale][0].value),\n      studyYear,\n      image{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n      linkedin,\n      github,\n      email\n    }\n': MEMBERS_QUERY_RESULT;
     '\n  *[_type == "sponsor"] | order(order asc, name asc) {\n    \n  _id,\n  name,\n  tier,\n  website,\n  logo{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n,\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value)\n  }\n': SPONSORS_QUERY_RESULT;
     '\n  *[_type == "sponsor" && showInMarquee == true] | order(order asc, name asc) {\n    \n  _id,\n  name,\n  tier,\n  website,\n  logo{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n\n  }\n': SPONSOR_MARQUEE_QUERY_RESULT;
     '\n  *[_type == "sponsorshipPackage"] {\n    _id,\n    tier,\n    featured,\n    "priceLabel": coalesce(priceLabel[language == $locale][0].value, priceLabel[language == $defaultLocale][0].value),\n    "benefits": coalesce(benefits[language == $locale][0].value, benefits[language == $defaultLocale][0].value),\n    "note": coalesce(note[language == $locale][0].value, note[language == $defaultLocale][0].value)\n  }\n': SPONSORSHIP_PACKAGES_QUERY_RESULT;

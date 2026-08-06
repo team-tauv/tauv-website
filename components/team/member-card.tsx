@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SanityImageCropped } from "@/components/shared/sanity-image";
 import { SocialIcon } from "@/components/shared/social-icon";
+import { isStudyYear } from "@/lib/taxonomy";
 import { cn } from "@/lib/utils";
 import type { MEMBERS_QUERY_RESULT } from "@/types/sanity.types";
 
@@ -9,6 +10,11 @@ type Member = MEMBERS_QUERY_RESULT[number];
 
 export function MemberCard({ member }: { member: Member }) {
   const t = useTranslations("member");
+  const tYear = useTranslations("studyYears");
+
+  // Bilinmeyen bir değer t()'yi patlatacağı için taxonomy'ye karşı doğrulanıyor.
+  const year = isStudyYear(member.studyYear) ? tYear(member.studyYear) : null;
+  const study = [member.major, year].filter(Boolean).join(" · ");
 
   return (
     <div
@@ -46,19 +52,46 @@ export function MemberCard({ member }: { member: Member }) {
           {member.role ? (
             <p className="text-muted-foreground mt-0.5 text-xs leading-snug">{member.role}</p>
           ) : null}
+          {study ? (
+            <p className="text-muted-foreground/80 mt-1 text-xs leading-snug">{study}</p>
+          ) : null}
         </div>
 
-        {member.linkedin ? (
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t("linkedinLabel", { name: member.name ?? "" })}
-            className="text-muted-foreground hover:text-primary hover:bg-accent shrink-0 rounded-md p-1.5 transition-colors"
-          >
-            <SocialIcon platform="linkedin" />
-          </a>
-        ) : null}
+        <div className="flex shrink-0 items-center gap-0.5">
+          {member.linkedin ? (
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("linkedinLabel", { name: member.name ?? "" })}
+              className="text-muted-foreground hover:text-primary hover:bg-accent rounded-md p-1.5 transition-colors"
+            >
+              <SocialIcon platform="linkedin" />
+            </a>
+          ) : null}
+
+          {member.github ? (
+            <a
+              href={member.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("githubLabel", { name: member.name ?? "" })}
+              className="text-muted-foreground hover:text-primary hover:bg-accent rounded-md p-1.5 transition-colors"
+            >
+              <SocialIcon platform="github" />
+            </a>
+          ) : null}
+
+          {member.email ? (
+            <a
+              href={`mailto:${member.email}`}
+              aria-label={t("emailLabel", { name: member.name ?? "" })}
+              className="text-muted-foreground hover:text-primary hover:bg-accent rounded-md p-1.5 transition-colors"
+            >
+              <SocialIcon platform="email" />
+            </a>
+          ) : null}
+        </div>
       </div>
     </div>
   );
