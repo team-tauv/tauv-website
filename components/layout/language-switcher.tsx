@@ -56,7 +56,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             disabled={isPending}
             aria-current={isActive ? "true" : undefined}
             className={cn(
-              "rounded-md px-2.5 py-1 font-mono text-xs font-bold uppercase transition-colors",
+              "rounded-md px-2.5 py-1 font-mono text-xs font-bold uppercase transition active:scale-90 active:duration-75",
               isActive
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent",

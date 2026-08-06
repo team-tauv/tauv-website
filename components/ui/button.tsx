@@ -4,18 +4,23 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium whitespace-nowrap transition-all outline-none focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  // `transition-all` değil `transition`: ikincisi renk/gölge/transform/filtre
+  // gibi ucuz özellikleri kapsar ama genişlik-yükseklik gibi layout'u
+  // tetikleyenlere dokunmaz.
+  // Basılı halde süre kısalır — bırakma yumuşak, basma anında tepki verir.
+  "inline-flex items-center justify-center gap-2 rounded-lg font-medium whitespace-nowrap transition duration-300 active:scale-[0.97] active:duration-75 outline-none focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:active:scale-100 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         /** Ana eylem — neon turkuaz, koyu metin (11.2:1 kontrast). */
         primary:
-          "bg-primary text-primary-foreground hover:shadow-glow-lg hover:brightness-110 active:brightness-95",
+          "bg-primary text-primary-foreground hover:shadow-glow-lg hover:brightness-110 hover:-translate-y-px active:translate-y-0 active:brightness-95",
         /** İkincil — cam yüzey, turkuaz kenarlıkla vurgu. */
         outline:
-          "border border-input bg-surface/40 text-foreground backdrop-blur-sm hover:border-primary hover:bg-surface hover:text-primary",
+          "border border-input bg-surface/40 text-foreground backdrop-blur-sm hover:border-primary hover:bg-surface hover:text-primary hover:-translate-y-px active:translate-y-0",
         ghost: "text-muted-foreground hover:bg-accent hover:text-foreground",
-        ocean: "bg-ocean text-ocean-foreground hover:brightness-110 active:brightness-95",
+        ocean:
+          "bg-ocean text-ocean-foreground hover:shadow-glow hover:brightness-110 hover:-translate-y-px active:translate-y-0 active:brightness-95",
       },
       size: {
         sm: "h-9 px-4 text-sm",

@@ -13,7 +13,7 @@ export function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   return (
     <Link
       href={{ pathname: "/vehicles/[slug]", params: { slug: vehicle.slug } }}
-      className="group border-border bg-surface hover:border-primary/50 hover:shadow-glow relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300"
+      className="group border-border bg-surface hover:border-primary/50 hover:shadow-glow relative flex flex-col overflow-hidden rounded-xl border transition duration-300 hover:-translate-y-1"
     >
       <div className="bg-background relative aspect-4/3 overflow-hidden">
         <SanityImageCropped

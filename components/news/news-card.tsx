@@ -11,7 +11,7 @@ export function NewsCard({ item }: { item: NewsItem }) {
   if (!item.slug) return null;
 
   return (
-    <article className="group border-border bg-surface hover:border-primary/50 flex flex-col overflow-hidden rounded-xl border transition-all duration-300">
+    <article className="group border-border bg-surface hover:border-primary/50 flex flex-col overflow-hidden rounded-xl border transition duration-300 hover:-translate-y-1">
       <Link
         href={{ pathname: "/news/[slug]", params: { slug: item.slug } }}
         className="flex flex-1 flex-col"

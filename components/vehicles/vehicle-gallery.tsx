@@ -71,7 +71,7 @@ export function VehicleGallery({ images }: { images: Gallery }) {
               type="button"
               onClick={() => emblaApi?.scrollPrev()}
               aria-label={t("prevImage")}
-              className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-9 items-center justify-center rounded-lg border transition-colors"
+              className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-9 items-center justify-center rounded-lg border transition active:scale-90 active:duration-75"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -79,7 +79,7 @@ export function VehicleGallery({ images }: { images: Gallery }) {
               type="button"
               onClick={() => emblaApi?.scrollNext()}
               aria-label={t("nextImage")}
-              className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-9 items-center justify-center rounded-lg border transition-colors"
+              className="border-border text-muted-foreground hover:border-primary hover:text-primary flex size-9 items-center justify-center rounded-lg border transition active:scale-90 active:duration-75"
             >
               <ChevronRight className="size-4" />
             </button>
@@ -94,7 +94,7 @@ export function VehicleGallery({ images }: { images: Gallery }) {
                 aria-label={t("goToImage", { number: index + 1 })}
                 aria-current={index === selected ? "true" : undefined}
                 className={cn(
-                  "h-1.5 rounded-full transition-all",
+                  "h-1.5 rounded-full transition-all duration-400",
                   index === selected ? "bg-primary w-6" : "bg-border hover:bg-input w-1.5",
                 )}
               />

@@ -28,7 +28,7 @@ export function DepartmentTabs({ members }: { members: Members }) {
   }
 
   const tabClass =
-    "rounded-lg px-4 py-2 text-sm font-medium transition-colors data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground";
+    "rounded-lg px-4 py-2 text-sm font-medium transition active:scale-95 active:duration-75 data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground";
 
   return (
     <Tabs.Root defaultValue="all" className="mt-12">

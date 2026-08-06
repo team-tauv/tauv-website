@@ -61,7 +61,7 @@ export function Navbar({ vehicles }: { vehicles: NavVehicle[] }) {
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="rounded-lg transition-opacity hover:opacity-80"
+          className="rounded-lg transition hover:opacity-80 active:scale-95 active:duration-75"
           aria-label={t("home")}
         >
           <Logo size={38} priority />
@@ -79,7 +79,7 @@ export function Navbar({ vehicles }: { vehicles: NavVehicle[] }) {
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? t("closeMenu") : t("openMenu")}
-            className="border-border text-foreground hover:border-primary hover:text-primary flex size-10 items-center justify-center rounded-lg border transition-colors lg:hidden"
+            className="border-border text-foreground hover:border-primary hover:text-primary flex size-10 items-center justify-center rounded-lg border transition active:scale-90 active:duration-75 lg:hidden"
           >
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>

@@ -20,7 +20,7 @@ export function MemberCard({ member }: { member: Member }) {
   return (
     <div
       className={cn(
-        "group border-border bg-surface relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300",
+        "group border-border bg-surface relative flex flex-col overflow-hidden rounded-xl border transition duration-300 hover:-translate-y-1",
         member.isLead ? "ring-primary/30 ring-1" : "hover:border-primary/50",
       )}
     >
