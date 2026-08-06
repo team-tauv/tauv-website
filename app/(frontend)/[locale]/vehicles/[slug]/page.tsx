@@ -148,32 +148,6 @@ export default async function VehicleDetailPage(props: {
               <VehicleGallery images={vehicle.gallery} />
             </div>
           ) : null}
-
-          {/* Kendi GLB'miz varsa o kazanır; renderUrl yalnızca yedek (Sketchfab vb.). */}
-          {vehicle.model3dUrl ? (
-            <div className="mt-14">
-              <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
-              <VehicleModelViewer
-                src={vehicle.model3dUrl}
-                alt={`${vehicle.title ?? ""} — ${t("render3d")}`}
-                poster={posterUrl}
-              />
-            </div>
-          ) : vehicle.renderUrl ? (
-            <div className="mt-14">
-              <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
-              <div className="border-border aspect-video overflow-hidden rounded-xl border">
-                <iframe
-                  src={vehicle.renderUrl}
-                  title={`${vehicle.title ?? ""} — ${t("render3d")}`}
-                  loading="lazy"
-                  allow="autoplay; fullscreen; xr-spatial-tracking"
-                  allowFullScreen
-                  className="size-full"
-                />
-              </div>
-            </div>
-          ) : null}
         </div>
 
         {/* Teknik veriler yan sütunda sabit kalır; uzun açıklamada kaybolmasın. */}
@@ -210,6 +184,33 @@ export default async function VehicleDetailPage(props: {
           ) : null}
         </aside>
       </div>
+
+      {/* 3B model ana görselle aynı genişlikte dursun diye gridin dışında. */}
+      {/* Kendi GLB'miz varsa o kazanır; renderUrl yalnızca yedek (Sketchfab vb.). */}
+      {vehicle.model3dUrl ? (
+        <div className="mt-16">
+          <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
+          <VehicleModelViewer
+            src={vehicle.model3dUrl}
+            alt={`${vehicle.title ?? ""} — ${t("render3d")}`}
+            poster={posterUrl}
+          />
+        </div>
+      ) : vehicle.renderUrl ? (
+        <div className="mt-16">
+          <h2 className="mb-5 text-sm font-bold tracking-wide uppercase">{t("render3d")}</h2>
+          <div className="border-border aspect-video overflow-hidden rounded-xl border">
+            <iframe
+              src={vehicle.renderUrl}
+              title={`${vehicle.title ?? ""} — ${t("render3d")}`}
+              loading="lazy"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              allowFullScreen
+              className="size-full"
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
