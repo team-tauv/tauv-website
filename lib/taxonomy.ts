@@ -52,7 +52,7 @@ export const TIER_VALUES = SPONSOR_TIERS.map((t) => t.value) as readonly Sponsor
 /**
  * Sıra önemli: üye formundaki menü bu sırayla dizilir. Serbest metin yerine
  * sabit liste, çünkü "3" / "3. sınıf" / "Üçüncü" gibi varyasyonlar aynı bilgiyi
- * farklı gösterir ve iki dilde çeviremezdik. Etiketler messages/*.json
+ * farklı gösterir ve dillere çeviremezdik. Etiketler messages/*.json
  * içindeki `studyYears.*` anahtarlarından gelir.
  */
 export const STUDY_YEARS = [

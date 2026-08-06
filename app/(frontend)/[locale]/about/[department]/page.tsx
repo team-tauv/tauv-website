@@ -12,7 +12,7 @@ import { FadeIn } from "@/components/shared/fade-in";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { MemberCard } from "@/components/team/member-card";
 
-/** Beş departman × iki dil = on sayfa, tamamı derleme anında üretilir. */
+/** Beş departman × dil sayısı kadar sayfa, tamamı derleme anında üretilir. */
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     DEPARTMENT_VALUES.map((department) => ({ locale, department })),

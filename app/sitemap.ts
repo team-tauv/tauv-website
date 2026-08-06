@@ -14,9 +14,9 @@ function absolute(href: Href, locale: Locale) {
 }
 
 /**
- * Her giriş, diğer dildeki karşılığını `alternates.languages` ile bildirir.
- * Arama motoru böylece /araclar ile /en/vehicles'ı ayrı sayfalar değil aynı
- * sayfanın iki dili olarak görür.
+ * Her giriş, diğer dillerdeki karşılıklarını `alternates.languages` ile bildirir.
+ * Arama motoru böylece /araclar, /en/vehicles ve /de/fahrzeuge'yi ayrı sayfalar
+ * değil aynı sayfanın dil sürümleri olarak görür.
  */
 function entry(href: Href, lastModified?: string): MetadataRoute.Sitemap[number] {
   return {

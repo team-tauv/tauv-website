@@ -4,6 +4,7 @@ import { structureTool } from "sanity/structure";
 import { internationalizedArray } from "sanity-plugin-internationalized-array";
 
 import { sanityLanguages } from "./lib/locales";
+import { TranslateMissingAction } from "./sanity/actions/translate-missing";
 import { apiVersion, dataset, projectId, studioUrl } from "./sanity/env";
 import { schemaTypes } from "./sanity/schemas";
 import { singletonTypes, structure } from "./sanity/structure";
@@ -21,10 +22,17 @@ export default defineConfig({
   },
 
   document: {
-    actions: (prev, { schemaType }) =>
-      singletonTypes.has(schemaType)
-        ? prev.filter(({ action }) => action !== "unpublish" && action !== "delete" && action !== "duplicate")
-        : prev,
+    actions: (prev, { schemaType }) => {
+      const actions = singletonTypes.has(schemaType)
+        ? prev.filter(
+            ({ action }) => action !== "unpublish" && action !== "delete" && action !== "duplicate",
+          )
+        : prev;
+
+      // Türkçe yazılan alanları eksik dillere çeviren aksiyon. Her doküman
+      // tipinde çalışır; çevrilecek alan yoksa kendini devre dışı bırakıyor.
+      return [...actions, TranslateMissingAction];
+    },
   },
 
   plugins: [
@@ -32,8 +40,9 @@ export default defineConfig({
 
     internationalizedArray({
       languages: sanityLanguages,
-      // Yeni doküman açıldığında Türkçe alan hazır gelsin; İngilizce
-      // "Add translation" ile eklenir. Böylece zorunlu olmadığı belli olur.
+      // Yeni doküman açıldığında yalnızca Türkçe alan hazır gelsin. Diğer
+      // diller "Eksik çevirileri doldur" aksiyonuyla ya da "Add translation"
+      // ile eklenir; böylece elle doldurmanın zorunlu olmadığı belli oluyor.
       defaultLanguages: ["tr"],
       fieldTypes: ["string", "text", "blockContent"],
       buttonLocations: ["field", "document"],
@@ -44,6 +53,8 @@ export default defineConfig({
     }),
 
     // GROQ sorgularını Studio içinden denemek için. Yalnız geliştirmede.
-    ...(process.env.NODE_ENV === "development" ? [visionTool({ defaultApiVersion: apiVersion })] : []),
+    ...(process.env.NODE_ENV === "development"
+      ? [visionTool({ defaultApiVersion: apiVersion })]
+      : []),
   ],
 });

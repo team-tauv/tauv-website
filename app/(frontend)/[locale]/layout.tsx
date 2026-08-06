@@ -7,14 +7,14 @@ import type { ReactNode } from "react";
 import "@/app/globals.css";
 import { fontVariables } from "@/lib/fonts";
 import { routing } from "@/i18n/routing";
-import { defaultLocale } from "@/lib/locales";
+import { defaultLocale, openGraphLocales, type Locale } from "@/lib/locales";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { FETCH_OPTIONS, sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { NAV_VEHICLES_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
-/** Her iki dil de derleme anında üretilir — istek anında locale çözümlenmez. */
+/** Tüm diller derleme anında üretilir — istek anında locale çözümlenmez. */
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -32,7 +32,7 @@ export async function generateMetadata(props: {
     openGraph: {
       type: "website",
       siteName: t("siteName"),
-      locale: locale === "tr" ? "tr_TR" : "en_US",
+      locale: openGraphLocales[locale as Locale] ?? openGraphLocales[defaultLocale],
     },
   };
 }

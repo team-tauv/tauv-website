@@ -5,17 +5,17 @@ içerik Sanity.io headless CMS'ten gelir.
 
 ## Teknoloji
 
-| Katman     | Seçim                                              |
-| ---------- | -------------------------------------------------- |
-| Framework  | Next.js 16 (App Router, React Server Components)    |
-| Dil        | TypeScript 5.9 (strict)                             |
-| Stil       | Tailwind CSS v4 (CSS-first `@theme`) + shadcn/ui    |
-| Animasyon  | Framer Motion                                       |
-| CMS        | Sanity v6 (`/studio` altında gömülü Studio)         |
-| 3B         | `@google/model-viewer` (glTF/GLB, WebXR ile mobil AR) |
-| i18n       | next-intl (TR varsayılan / EN) + Sanity alan bazlı çeviri |
-| Form       | React Hook Form + Zod + Resend                      |
-| Barındırma | Vercel                                              |
+| Katman     | Seçim                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------- |
+| Framework  | Next.js 16 (App Router, React Server Components)                                          |
+| Dil        | TypeScript 5.9 (strict)                                                                   |
+| Stil       | Tailwind CSS v4 (CSS-first `@theme`) + shadcn/ui                                          |
+| Animasyon  | Framer Motion                                                                             |
+| CMS        | Sanity v6 (`/studio` altında gömülü Studio)                                               |
+| 3B         | `@google/model-viewer` (glTF/GLB, WebXR ile mobil AR)                                     |
+| i18n       | next-intl (TR varsayılan / EN / DE) + Sanity alan bazlı çeviri, Studio'da otomatik çeviri |
+| Form       | React Hook Form + Zod + Resend                                                            |
+| Barındırma | Vercel                                                                                    |
 
 ## Başlangıç
 
@@ -30,15 +30,15 @@ npm run dev
 
 ## Komutlar
 
-| Komut                  | Açıklama                                       |
-| ---------------------- | ---------------------------------------------- |
-| `npm run dev`          | Turbopack ile geliştirme sunucusu               |
-| `npm run build`        | Prodüksiyon derlemesi                           |
-| `npm run typecheck`    | `tsc --noEmit` ile tip kontrolü                 |
-| `npm run lint`         | ESLint                                          |
-| `npm run sanity:typegen` | Şemalardan TypeScript tipleri üret            |
-| `npm run model:optimize` | GLB'yi web'e uygun boyuta indir (bkz. 3B araç modeli) |
-| `npm run model:inspect`  | GLB içeriğini incele (vertex, doku, sıkıştırma) |
+| Komut                          | Açıklama                                                                                            |
+| ------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `npm run dev`                  | Turbopack ile geliştirme sunucusu                                                                   |
+| `npm run build`                | Prodüksiyon derlemesi                                                                               |
+| `npm run typecheck`            | `tsc --noEmit` ile tip kontrolü                                                                     |
+| `npm run lint`                 | ESLint                                                                                              |
+| `npm run sanity:typegen`       | Şemalardan TypeScript tipleri üret                                                                  |
+| `npm run model:optimize`       | GLB'yi web'e uygun boyuta indir (bkz. 3B araç modeli)                                               |
+| `npm run model:inspect`        | GLB içeriğini incele (vertex, doku, sıkıştırma)                                                     |
 | `npm run sanity:seed:packages` | Sponsorluk paketlerini sponsorluk dosyasındaki tablodan Sanity'ye yaz (var olan kayıtlara dokunmaz) |
 
 ## Rotalar
@@ -47,29 +47,52 @@ Dosya sistemindeki segment adları İngilizcedir; kullanıcıya görünen URL
 `i18n/routing.ts` içindeki `pathnames` tablosundan üretilir. Varsayılan dil (TR)
 ön ek almaz.
 
-| Dosya yolu                    | TR URL             | EN URL                | İçerik |
-| ----------------------------- | ------------------ | --------------------- | ------ |
-| `[locale]/page`               | `/`                | `/en`                 | Hero, metrikler, öne çıkan araç, sponsorlar, haberler |
-| `[locale]/about`              | `/hakkimizda`      | `/en/about`           | Misyon/vizyon + departmana göre ekip |
-| `[locale]/vehicles`           | `/araclar`         | `/en/vehicles`        | Araç listesi |
-| `[locale]/vehicles/[slug]`    | `/araclar/nemo`    | `/en/vehicles/nemo`   | Teknik tablo, galeri, 3B model |
-| `[locale]/competitions`       | `/yarismalar`      | `/en/competitions`    | Zaman çizelgesi, dereceler |
-| `[locale]/sponsors`           | `/sponsorlar`      | `/en/sponsors`        | Erişim metrikleri, katmanlı logo matrisi, başarılar, sponsorluk paketleri, PDF |
-| `[locale]/news`               | `/haberler`        | `/en/news`            | Duyuru listesi |
-| `[locale]/news/[slug]`        | `/haberler/...`    | `/en/news/...`        | Haber detayı |
-| `[locale]/contact`            | `/iletisim`        | `/en/contact`         | Form, konum, üye alımı |
-| `(studio)/studio`             | `/studio`          | —                     | Sanity Studio (locale dışı) |
+| Dosya yolu                 | TR URL          | EN URL              | DE URL               | İçerik                                                                         |
+| -------------------------- | --------------- | ------------------- | -------------------- | ------------------------------------------------------------------------------ |
+| `[locale]/page`            | `/`             | `/en`               | `/de`                | Hero, metrikler, öne çıkan araç, sponsorlar, haberler                          |
+| `[locale]/about`           | `/hakkimizda`   | `/en/about`         | `/de/ueber-uns`      | Misyon/vizyon + departmana göre ekip                                           |
+| `[locale]/vehicles`        | `/araclar`      | `/en/vehicles`      | `/de/fahrzeuge`      | Araç listesi                                                                   |
+| `[locale]/vehicles/[slug]` | `/araclar/nemo` | `/en/vehicles/nemo` | `/de/fahrzeuge/nemo` | Teknik tablo, galeri, 3B model                                                 |
+| `[locale]/competitions`    | `/yarismalar`   | `/en/competitions`  | `/de/wettbewerbe`    | Zaman çizelgesi, dereceler                                                     |
+| `[locale]/sponsors`        | `/sponsorlar`   | `/en/sponsors`      | `/de/sponsoren`      | Erişim metrikleri, katmanlı logo matrisi, başarılar, sponsorluk paketleri, PDF |
+| `[locale]/news`            | `/blog`         | `/en/blog`          | `/de/blog`           | Duyuru listesi                                                                 |
+| `[locale]/news/[slug]`     | `/blog/...`     | `/en/blog/...`      | `/de/blog/...`       | Haber detayı                                                                   |
+| `[locale]/contact`         | `/iletisim`     | `/en/contact`       | `/de/kontakt`        | Form, konum, üye alımı                                                         |
+| `(studio)/studio`          | `/studio`       | —                   | —                    | Sanity Studio (locale dışı)                                                    |
 
 ### Dil desteği nasıl çalışır
 
-- **Arayüz metinleri** → `messages/tr.json` ve `messages/en.json`. Bileşenlerde
-  `useTranslations()` / `getTranslations()` ile okunur.
+Diller: **Türkçe (varsayılan), İngilizce, Almanca**. Tek kaynak `lib/locales.ts`;
+yeni bir dil eklemek için oradaki listeye kod eklenir, `i18n/routing.ts`
+içindeki her rotaya o dilin URL'si yazılır ve `messages/<kod>.json` oluşturulur.
+Sanity tarafı listeyi aynı dosyadan okuduğu için ek iş gerektirmez.
+
+- **Arayüz metinleri** → `messages/tr.json`, `messages/en.json`, `messages/de.json`.
+  Bileşenlerde `useTranslations()` / `getTranslations()` ile okunur.
 - **CMS içeriği** → Sanity'de alan bazlı çeviri
   (`sanity-plugin-internationalized-array`). Görsel, sıra, yıl, logo gibi dilden
-  bağımsız alanlar tek kopya kalır; yalnızca metin alanları iki dillidir.
-- **Eksik çeviri** → EN alanı boşsa TR içerik gösterilir (fallback), sayfa boş kalmaz.
+  bağımsız alanlar tek kopya kalır; yalnızca metin alanları çok dillidir.
+- **Eksik çeviri** → Hedef dildeki alan boşsa TR içerik gösterilir (fallback),
+  sayfa boş kalmaz.
 - **Link verirken** `next/link` değil `@/i18n/navigation` içindeki `Link`
   kullanılır; aksi hâlde locale kaybolur.
+
+### Otomatik çeviri (Studio)
+
+Türkçe alanları doldurup dokümanın alt köşesindeki `⋯` menüsünden **"Eksik
+çevirileri doldur"** denince, boş bırakılmış İngilizce ve Almanca alanlar
+otomatik çevrilip **taslağa** yazılır. Dolu çeviriler korunur, yayınlama
+yapılmaz — metni gözden geçirip kendin yayınlarsın.
+
+- Anahtar: `.env.local` içindeki `GEMINI_API_KEY`
+  ([aistudio.google.com/apikey](https://aistudio.google.com/apikey), ücretsiz,
+  kredi kartı istemez). Anahtar yoksa yalnızca bu düğme çalışmaz.
+- Zengin metinde blok yapısı, bağlantılar ve görseller korunur; yalnızca metin
+  parçaları çevrilir.
+- Akış: `sanity/actions/translate-missing.tsx` (hangi alanlar eksik) →
+  `sanity/lib/translate-fields.ts` (topla/patch üret) → `app/api/translate`
+  (uç nokta) → `lib/translate.ts` (sağlayıcı). Sağlayıcı değişecekse tek
+  dokunulacak yer sonuncusu.
 
 ## 3B araç modeli
 
@@ -79,13 +102,13 @@ kaydır-yakınlaştır, 3 sn hareketsizlikten sonra otomatik dönüş; mobilde A
 
 ### Nasıl çalışır
 
-| Parça | Yer |
-| ----- | --- |
-| Sanity alanları | `sanity/schemas/documents/vehicle.ts` → `model3d`, `modelPoster`, `renderUrl` |
-| Sorgu | `sanity/lib/queries.ts` → `VEHICLE_BY_SLUG_QUERY` içinde `model3dUrl`, `modelPoster` |
-| Bileşen | `components/vehicles/vehicle-model-viewer.tsx` |
-| JSX tipleri | `types/model-viewer.d.ts` (`<model-viewer>` bir web component, React tanımaz) |
-| Kullanım | `app/(frontend)/[locale]/vehicles/[slug]/page.tsx` |
+| Parça           | Yer                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------ |
+| Sanity alanları | `sanity/schemas/documents/vehicle.ts` → `model3d`, `modelPoster`, `renderUrl`        |
+| Sorgu           | `sanity/lib/queries.ts` → `VEHICLE_BY_SLUG_QUERY` içinde `model3dUrl`, `modelPoster` |
+| Bileşen         | `components/vehicles/vehicle-model-viewer.tsx`                                       |
+| JSX tipleri     | `types/model-viewer.d.ts` (`<model-viewer>` bir web component, React tanımaz)        |
+| Kullanım        | `app/(frontend)/[locale]/vehicles/[slug]/page.tsx`                                   |
 
 Kaynak seçimi sırayla: **`model3d`** (kendi GLB'miz) → **`renderUrl`** (Sketchfab
 vb. iframe yedeği) → hiçbiri yoksa bölüm çizilmez.
@@ -119,12 +142,12 @@ baştan doğru yoğunlukta çıkarmak, sonradan düşürmekten iyidir.**
 
 Diğer seçenekler:
 
-| Format | Durum |
-| ------ | ----- |
-| **FBX** | Önerilen. Parça hiyerarşisini, isimleri, malzemeleri ve transformları korur. İleride parçaya tıklanabilir hotspot eklemek istenirse bu ağaç gerekir. |
-| **GLB** | SolidWorks 2022+ doğrudan `.glb` verebiliyor. Malzemeler ham kalır ama Blender'ı atlayıp modelin sitede nasıl durduğunu hızlıca görmek için ideal. |
+| Format   | Durum                                                                                                                                                                                                                                                                  |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **FBX**  | Önerilen. Parça hiyerarşisini, isimleri, malzemeleri ve transformları korur. İleride parçaya tıklanabilir hotspot eklemek istenirse bu ağaç gerekir.                                                                                                                   |
+| **GLB**  | SolidWorks 2022+ doğrudan `.glb` verebiliyor. Malzemeler ham kalır ama Blender'ı atlayıp modelin sitede nasıl durduğunu hızlıca görmek için ideal.                                                                                                                     |
 | **STEP** | B-rep taşır, mesh yoğunluğuna sonradan karar verilir. Ama Blender STEP'i native açamaz (_STEPper_ eklentisi veya FreeCAD üzerinden dolaşmak gerekir) ve import sırasındaki tessellation genelde CAD'inkinden kötüdür. Yalnızca yoğunlukla defalarca oynanacaksa değer. |
-| **OBJ** | Kullanmayın. Hiyerarşi yok (araç tek mesh'e düşer, parça isimleri kaybolur), birim metadata'sı yok, ASCII olduğu için dosya devasa. |
+| **OBJ**  | Kullanmayın. Hiyerarşi yok (araç tek mesh'e düşer, parça isimleri kaybolur), birim metadata'sı yok, ASCII olduğu için dosya devasa.                                                                                                                                    |
 
 #### 2. Blender'da düzenle
 
@@ -160,12 +183,12 @@ npm run model:inspect -- altay-web.glb      # ne çıktığını görmek için
 
 Gerçek ölçüm (Altay, Blender glTF export'u):
 
-| | Ham export | Betikten sonra |
-| --- | --- | --- |
-| Dosya | 89 MB | **1,29 MB** |
-| Vertex | 2.405.252 | 482.975 |
-| Draco | yok | var |
-| `TEXCOORD_0` | var (kullanılmıyor) | atıldı |
+|              | Ham export          | Betikten sonra |
+| ------------ | ------------------- | -------------- |
+| Dosya        | 89 MB               | **1,29 MB**    |
+| Vertex       | 2.405.252           | 482.975        |
+| Draco        | yok                 | var            |
+| `TEXCOORD_0` | var (kullanılmıyor) | atıldı         |
 
 **Hedef: 10 MB altı.** Aşarsanız `--error` değerini büyütün (varsayılan `0.001`;
 `0.005` gözle görülür bozulma yapmadan epey kırpar) veya 0. adıma dönüp CAD'de

@@ -5,7 +5,7 @@ import { defineQuery } from "next-sanity";
  * sanity/lib/i18n.ts içindeki localeParams(locale) bunları üretir.
  *
  * Çeviri girilmemiş alanlarda coalesce ikinci argümana düşer, yani içerik
- * varsayılan dile (tr) yedeklenir. Her iki dil de boşsa null döner.
+ * varsayılan dile (tr) yedeklenir. Hiçbir dilde değer yoksa null döner.
  * ------------------------------------------------------------------------- */
 
 const IMAGE = /* groq */ `

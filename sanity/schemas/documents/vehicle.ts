@@ -29,7 +29,7 @@ export const vehicle = defineType({
       title: "URL adresi",
       type: "slug",
       group: "general",
-      description: "Her iki dilde de aynı kullanılır.",
+      description: "Tüm dillerde aynı kullanılır.",
       options: { source: "title", maxLength: 64 },
       validation: (rule) => rule.required(),
     }),

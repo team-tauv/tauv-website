@@ -1,0 +1,201 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "vehicles": "Fahrzeuge",
+    "competitions": "Wettbewerbe",
+    "sponsors": "Sponsoren",
+    "news": "Blog",
+    "contact": "Kontakt",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "hero": {
+    "titleFallback": "Team für unbemannte Unterwassersysteme der Türkisch-Deutschen Universität",
+    "taglineFallback": "Zukunft in der Tiefe, Tiefe in der Zukunft.",
+    "ctaVehicles": "Unsere Fahrzeuge entdecken",
+    "ctaSponsor": "Sponsor werden",
+    "scrollHint": "Nach unten scrollen"
+  },
+  "home": {
+    "featuredEyebrow": "Im Fokus",
+    "featuredCta": "Fahrzeug ansehen",
+    "vehiclesAll": "Alle Fahrzeuge",
+    "sponsorsEyebrow": "Unterstützt von",
+    "sponsorsTitle": "Unsere Sponsoren",
+    "sponsorsEmpty": "Unsere Sponsorenliste erscheint hier in Kürze.",
+    "newsEyebrow": "Blog",
+    "newsTitle": "Neueste Beiträge",
+    "newsAll": "Alle Beiträge",
+    "newsEmpty": "Noch keine Beiträge veröffentlicht."
+  },
+  "news": {
+    "eyebrow": "Journal",
+    "title": "Blog",
+    "description": "Neuigkeiten aus dem Team, Wettbewerbsberichte und technische Beiträge.",
+    "empty": "Noch keine Beiträge veröffentlicht.",
+    "backToList": "Alle Beiträge",
+    "relatedVehicle": "Zugehöriges Fahrzeug"
+  },
+  "about": {
+    "eyebrow": "Das Team",
+    "title": "Über uns",
+    "description": "Ein studentisches Team, das an der Türkisch-Deutschen Universität an Unterwasserrobotik arbeitet.",
+    "mission": "Mission",
+    "vision": "Vision"
+  },
+  "team": {
+    "eyebrow": "Mitglieder",
+    "title": "Unser Team",
+    "description": "Unsere Bereiche von der Mechanikkonstruktion bis zur Organisation und die Mentoren, die sie begleiten.",
+    "all": "Alle",
+    "allDepartments": "Gesamtes Team",
+    "backToTeam": "Zurück zum Team",
+    "departmentDescription": "Teammitglieder im Bereich {department}.",
+    "departmentEmpty": "In diesem Bereich sind noch keine Mitglieder eingetragen.",
+    "filterLabel": "Nach Bereich filtern",
+    "empty": "Die Teamliste erscheint hier in Kürze."
+  },
+  "competitions": {
+    "eyebrow": "Im Einsatz",
+    "title": "Wettbewerbe & Erfolge",
+    "description": "Von TEKNOFEST bis zur TAC Challenge — die Wettbewerbe, an denen wir teilnehmen, und die Ergebnisse, die wir mitbringen.",
+    "empty": "Wettbewerbsbeiträge erscheinen hier in Kürze.",
+    "rankLabel": "Platz {rank}",
+    "technicalReport": "Technischer Bericht (PDF)"
+  },
+  "contact": {
+    "eyebrow": "Kontakt aufnehmen",
+    "title": "Kontakt",
+    "description": "Ob Sponsoring, Zusammenarbeit oder Teambeitritt — schreiben Sie uns.",
+    "emailHeading": "E-Mail",
+    "addressHeading": "Adresse",
+    "socialHeading": "Soziale Medien",
+    "mapHeading": "Standort",
+    "recruitmentHeading": "Bewerbungen",
+    "recruitmentClosed": "Die Bewerbungsphase ist derzeit geschlossen. Folgen Sie unseren Social-Media-Kanälen, um die nächste Ausschreibung nicht zu verpassen.",
+    "recruitmentOpenFallback": "Die Bewerbungsphase läuft. Nutzen Sie den Link unten, um das Formular auszufüllen.",
+    "applyNow": "Jetzt bewerben",
+    "form": {
+      "name": "Vor- und Nachname",
+      "email": "E-Mail",
+      "subject": "Betreff",
+      "message": "Ihre Nachricht",
+      "submit": "Senden",
+      "sending": "Wird gesendet…",
+      "success": "Ihre Nachricht wurde gesendet. Wir melden uns in Kürze."
+    },
+    "errors": {
+      "nameMin": "Ihr Name muss mindestens 2 Zeichen lang sein.",
+      "nameMax": "Der Name darf höchstens 80 Zeichen lang sein.",
+      "emailInvalid": "Geben Sie eine gültige E-Mail-Adresse ein.",
+      "subjectMin": "Der Betreff muss mindestens 3 Zeichen lang sein.",
+      "subjectMax": "Der Betreff darf höchstens 120 Zeichen lang sein.",
+      "messageMin": "Ihre Nachricht muss mindestens 20 Zeichen lang sein.",
+      "messageMax": "Die Nachricht darf höchstens 4000 Zeichen lang sein.",
+      "validation": "Einige Felder fehlen oder sind ungültig.",
+      "notConfigured": "Das Formular ist derzeit nicht verfügbar. Bitte schreiben Sie uns direkt eine E-Mail.",
+      "sendFailed": "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns eine E-Mail."
+    }
+  },
+  "sponsors": {
+    "eyebrow": "Unsere Unterstützer",
+    "title": "Sponsoren",
+    "description": "Die Organisationen, deren Unterstützung unsere Fahrzeuge zu Wasser bringt.",
+    "empty": "Unsere Sponsorenliste erscheint hier in Kürze.",
+    "becomeTitle": "Sponsor werden",
+    "becomeFallback": "Unser Team zu unterstützen heißt, direkt in Ingenieurausbildung und Unterwassertechnologie zu investieren. Kontaktieren Sie uns für unsere Sponsoringpakete.",
+    "downloadDeck": "Sponsoringmappe (PDF)",
+    "contactUs": "Kontakt aufnehmen",
+    "packagesEyebrow": "Sponsoringpakete",
+    "packagesTitle": "Was jede Stufe umfasst",
+    "packagesDescription": "Die Budgetspannen gelten pro Saison. Sach- und Dienstleistungen werden anhand ihres Marktwerts denselben Stufen zugeordnet.",
+    "packagePriceOnRequest": "Verhandelbar",
+    "achievementsTitle": "Unsere Ergebnisse",
+    "achievementsDescription": "Die Logos unserer Sponsoren waren auf den Fahrzeugen und Präsentationen dabei, die diese Ergebnisse erzielt haben.",
+    "achievementsLink": "Vollständige Wettbewerbshistorie →"
+  },
+  "vehicle": {
+    "listEyebrow": "Flotte",
+    "listTitle": "Unsere Fahrzeuge",
+    "listDescription": "Vom Entwurf bis zur Fertigung, vom Beckentest bis zum Wettbewerbsgelände — die autonomen und ferngesteuerten Unterwasserfahrzeuge, die wir bauen.",
+    "empty": "Fahrzeugeinträge erscheinen hier in Kürze.",
+    "backToList": "Alle Fahrzeuge",
+    "specs": "Technische Daten",
+    "gallery": "Galerie",
+    "render3d": "3D-Modell",
+    "model3dLoading": "3D-Modell wird geladen…",
+    "model3dError": "Das 3D-Modell konnte nicht geladen werden.",
+    "model3dHint": "Zum Drehen ziehen, zum Zoomen scrollen.",
+    "model3dReset": "Ansicht zurücksetzen",
+    "competitions": "Wettbewerbsteilnahmen",
+    "prevImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild",
+    "goToImage": "Zu Bild {number} springen",
+    "detail": "Details ansehen",
+    "type": "Typ",
+    "year": "Jahr",
+    "status": {
+      "active": "Aktiv",
+      "development": "In Entwicklung",
+      "retired": "Ausgemustert"
+    }
+  },
+  "departments": {
+    "mechanical": "Mechanik",
+    "electronics": "Elektronik",
+    "software": "Software",
+    "organization": "Organisation",
+    "mentors": "Mentoren"
+  },
+  "tiers": {
+    "main": "Hauptsponsor",
+    "platinum": "Platin",
+    "gold": "Gold",
+    "silver": "Silber",
+    "bronze": "Bronze",
+    "supplier": "Produktsponsor"
+  },
+  "member": {
+    "linkedinLabel": "{name} — LinkedIn-Profil",
+    "githubLabel": "{name} — GitHub-Profil",
+    "emailLabel": "{name} — E-Mail schreiben",
+    "lead": "Teamleitung"
+  },
+  "studyYears": {
+    "prep": "Vorbereitungsjahr",
+    "1": "1. Semesterjahr",
+    "2": "2. Semesterjahr",
+    "3": "3. Semesterjahr",
+    "4": "4. Semesterjahr",
+    "msc": "Master",
+    "phd": "Promotion",
+    "alumni": "Alumni"
+  },
+  "footer": {
+    "tagline": "Das Team für unbemannte Unterwassersysteme der Türkisch-Deutschen Universität.",
+    "university": "Türkisch-Deutsche Universität",
+    "universityAddress": "Şahinkaya Cad. Nr. 106, 34820 Beykoz / Istanbul, Türkei",
+    "quickLinks": "Schnellzugriff",
+    "followUs": "Folgen Sie uns",
+    "rights": "Alle Rechte vorbehalten.",
+    "backToTop": "Nach oben"
+  },
+  "language": {
+    "label": "Sprache",
+    "switchTo": "Auf Deutsch wechseln"
+  },
+  "common": {
+    "readMore": "Weiterlesen",
+    "loading": "Wird geladen…",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundBody": "Die gesuchte Seite wurde möglicherweise verschoben oder hat nie existiert.",
+    "backHome": "Zur Startseite"
+  },
+  "metadata": {
+    "siteName": "TAUV",
+    "defaultTitle": "TAUV — Team für unbemannte Unterwassersysteme",
+    "defaultDescription": "Das Team für unbemannte Unterwassersysteme der Türkisch-Deutschen Universität. Wir entwerfen und bauen autonome Unterwasserfahrzeuge und treten bei TEKNOFEST und der TAC Challenge an."
+  }
+}
