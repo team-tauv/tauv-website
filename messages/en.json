@@ -19,6 +19,15 @@
     "scrollHint": "Scroll down"
   },
   "home": {
+    "aboutTitle": "A student team that learns underwater",
+    "aboutFallback": "Founded at the Turkish-German University, TAUV is a student team that builds unmanned underwater vehicles end to end — from design to manufacturing. With our mechanical, electronics, software and organisation teams we put a new vehicle in the water every season and represent our university at national and international competitions.",
+    "aboutCta": "Meet the team",
+    "aboutJoin": "Join us",
+    "goalsEyebrow": "{season} Season",
+    "goalsEyebrowPlain": "This Season",
+    "goalsTitle": "Competitions We Are Aiming For",
+    "goalsDescription": "The events we are preparing for this season, and the goal we have set for each of them.",
+    "goalsAll": "Competition history",
     "featuredEyebrow": "Featured Vehicle",
     "featuredCta": "View vehicle",
     "vehiclesAll": "All vehicles",

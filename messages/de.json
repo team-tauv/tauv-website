@@ -19,6 +19,15 @@
     "scrollHint": "Nach unten scrollen"
   },
   "home": {
+    "aboutTitle": "Ein studentisches Team, das unter Wasser lernt",
+    "aboutFallback": "TAUV ist ein an der Türkisch-Deutschen Universität gegründetes studentisches Team, das unbemannte Unterwasserfahrzeuge von der Konstruktion bis zur Fertigung selbst entwickelt. Mit unseren Bereichen Mechanik, Elektronik, Software und Organisation bringen wir jede Saison ein neues Fahrzeug ins Wasser und vertreten unsere Universität bei nationalen und internationalen Wettbewerben.",
+    "aboutCta": "Team kennenlernen",
+    "aboutJoin": "Mach mit",
+    "goalsEyebrow": "Saison {season}",
+    "goalsEyebrowPlain": "Diese Saison",
+    "goalsTitle": "Unsere Zielwettbewerbe",
+    "goalsDescription": "Die Wettbewerbe, auf die wir uns in dieser Saison vorbereiten, und das Ziel, das wir uns jeweils gesetzt haben.",
+    "goalsAll": "Wettbewerbshistorie",
     "featuredEyebrow": "Im Fokus",
     "featuredCta": "Fahrzeug ansehen",
     "vehiclesAll": "Alle Fahrzeuge",

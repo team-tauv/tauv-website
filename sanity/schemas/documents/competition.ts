@@ -21,7 +21,12 @@ export const competition = defineType({
       name: "year",
       title: "Yıl",
       type: "number",
-      validation: (rule) => rule.required().integer().min(2010).max(new Date().getFullYear() + 2),
+      validation: (rule) =>
+        rule
+          .required()
+          .integer()
+          .min(2010)
+          .max(new Date().getFullYear() + 2),
     }),
     defineField({
       name: "date",
@@ -47,6 +52,23 @@ export const competition = defineType({
       title: "Sıralama",
       type: "number",
       description: "Sayısal derece (1, 2, 3…). Rozet göstermek için kullanılır, isteğe bağlı.",
+    }),
+    defineField({
+      name: "targeted",
+      title: "Bu sezon hedefleniyor",
+      type: "boolean",
+      description:
+        "Açıkken ana sayfadaki 'Sezon Hedeflerimiz' bölümünde gösterilir. " +
+        "Yarışma bittiğinde kapatıp sonuç alanlarını doldurmak yeterli.",
+      initialValue: false,
+    }),
+    defineField({
+      name: "goal",
+      title: "Hedefimiz",
+      type: "internationalizedArrayText",
+      description:
+        "Bu yarışmada neyi hedefliyoruz? Ana sayfadaki hedef kartında gösterilen 1–2 cümle.",
+      hidden: ({ parent }) => !parent?.targeted,
     }),
     defineField({
       name: "description",
@@ -80,15 +102,25 @@ export const competition = defineType({
     }),
   ],
   orderings: [
-    { title: "Tarih (yeniden eskiye)", name: "dateDesc", by: [{ field: "date", direction: "desc" }] },
+    {
+      title: "Tarih (yeniden eskiye)",
+      name: "dateDesc",
+      by: [{ field: "date", direction: "desc" }],
+    },
   ],
   preview: {
-    select: { title: "name", date: "date", rank: "rank", media: "coverImage" },
-    prepare({ title, date, rank, media }) {
+    select: {
+      title: "name",
+      date: "date",
+      rank: "rank",
+      targeted: "targeted",
+      media: "coverImage",
+    },
+    prepare({ title, date, rank, targeted, media }) {
       const year = date ? new Date(date as string).getFullYear() : "—";
       return {
         title: rank ? `${title} — ${rank}.` : title,
-        subtitle: String(year),
+        subtitle: targeted ? `${year} · Hedef` : String(year),
         media,
       };
     },

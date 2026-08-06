@@ -19,6 +19,15 @@
     "scrollHint": "Aşağı kaydırın"
   },
   "home": {
+    "aboutTitle": "Su altında öğrenen bir öğrenci takımı",
+    "aboutFallback": "Türk-Alman Üniversitesi bünyesinde kurulan TAUV, insansız su altı araçlarını tasarımdan üretime kendi imkânlarıyla geliştiren bir öğrenci takımı. Mekanik, elektronik, yazılım ve organizasyon ekiplerimizle her sezon yeni bir araç suya indiriyor, ulusal ve uluslararası yarışmalarda ülkemizi temsil ediyoruz.",
+    "aboutCta": "Takımı tanıyın",
+    "aboutJoin": "Bize katılın",
+    "goalsEyebrow": "{season} Sezonu",
+    "goalsEyebrowPlain": "Bu Sezon",
+    "goalsTitle": "Hedeflediğimiz Yarışmalar",
+    "goalsDescription": "Sezon boyunca hazırlandığımız organizasyonlar ve her birinde koyduğumuz hedef.",
+    "goalsAll": "Yarışma geçmişi",
     "featuredEyebrow": "Öne Çıkan Araç",
     "featuredCta": "Aracı incele",
     "vehiclesAll": "Tüm araçlar",

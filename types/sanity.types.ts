@@ -127,6 +127,8 @@ export type Competition = {
   location?: InternationalizedArrayString;
   result?: InternationalizedArrayString;
   rank?: number;
+  targeted?: boolean;
+  goal?: InternationalizedArrayText;
   description?: InternationalizedArrayBlockContent;
   coverImage?: {
     asset?: SanityImageAssetReference;
@@ -862,6 +864,19 @@ export type COMPETITIONS_QUERY_RESULT = Array<{
 }>;
 
 // Source: sanity/lib/queries.ts
+// Variable: TARGET_COMPETITIONS_QUERY
+// Query: *[_type == "competition" && targeted == true] | order(date asc) {    _id,    name,    organizer,    year,    date,    "location": coalesce(location[language == $locale][0].value, location[language == $defaultLocale][0].value),    "goal": coalesce(goal[language == $locale][0].value, goal[language == $defaultLocale][0].value)  }
+export type TARGET_COMPETITIONS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  organizer: string | null;
+  year: number | null;
+  date: string | null;
+  location: string | null;
+  goal: string | null;
+}>;
+
+// Source: sanity/lib/queries.ts
 // Variable: ACHIEVEMENTS_QUERY
 // Query: *[_type == "competition" && defined(result[language == $defaultLocale][0].value)]    | order(date desc)[0...6] {      _id,      name,      year,      rank,      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)    }
 export type ACHIEVEMENTS_QUERY_RESULT = Array<{
@@ -1088,6 +1103,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "sponsor" && showInMarquee == true] | order(order asc, name asc) {\n    \n  _id,\n  name,\n  tier,\n  website,\n  logo{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n\n  }\n': SPONSOR_MARQUEE_QUERY_RESULT;
     '\n  *[_type == "sponsorshipPackage"] {\n    _id,\n    tier,\n    featured,\n    "priceLabel": coalesce(priceLabel[language == $locale][0].value, priceLabel[language == $defaultLocale][0].value),\n    "benefits": coalesce(benefits[language == $locale][0].value, benefits[language == $defaultLocale][0].value),\n    "note": coalesce(note[language == $locale][0].value, note[language == $defaultLocale][0].value)\n  }\n': SPONSORSHIP_PACKAGES_QUERY_RESULT;
     '\n  *[_type == "competition"] | order(date desc) {\n    _id,\n    name,\n    organizer,\n    year,\n    date,\n    rank,\n    "location": coalesce(location[language == $locale][0].value, location[language == $defaultLocale][0].value),\n    "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value),\n    "description": coalesce(description[language == $locale][0].value, description[language == $defaultLocale][0].value),\n    coverImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    certificate{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n},\n    "technicalReport": technicalReport.asset->url,\n    "vehiclesUsed": vehiclesUsed[]->{ _id, title, "slug": slug.current }\n  }\n': COMPETITIONS_QUERY_RESULT;
+    '\n  *[_type == "competition" && targeted == true] | order(date asc) {\n    _id,\n    name,\n    organizer,\n    year,\n    date,\n    "location": coalesce(location[language == $locale][0].value, location[language == $defaultLocale][0].value),\n    "goal": coalesce(goal[language == $locale][0].value, goal[language == $defaultLocale][0].value)\n  }\n': TARGET_COMPETITIONS_QUERY_RESULT;
     '\n  *[_type == "competition" && defined(result[language == $defaultLocale][0].value)]\n    | order(date desc)[0...6] {\n      _id,\n      name,\n      year,\n      rank,\n      "result": coalesce(result[language == $locale][0].value, result[language == $defaultLocale][0].value)\n    }\n': ACHIEVEMENTS_QUERY_RESULT;
     '\n  *[_type == "news"] | order(publishedAt desc) {\n    \n  _id,\n  "slug": slug.current,\n  publishedAt,\n  "title": coalesce(title[language == $locale][0].value, title[language == $defaultLocale][0].value),\n  "excerpt": coalesce(excerpt[language == $locale][0].value, excerpt[language == $defaultLocale][0].value),\n  coverImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n\n  }\n': NEWS_QUERY_RESULT;
     '\n  *[_type == "news"] | order(publishedAt desc)[0...3] {\n    \n  _id,\n  "slug": slug.current,\n  publishedAt,\n  "title": coalesce(title[language == $locale][0].value, title[language == $defaultLocale][0].value),\n  "excerpt": coalesce(excerpt[language == $locale][0].value, excerpt[language == $defaultLocale][0].value),\n  coverImage{\n  ...,\n  "alt": coalesce(alt, ""),\n  asset->{\n    _id,\n    "lqip": metadata.lqip,\n    "dimensions": metadata.dimensions\n  }\n}\n\n  }\n': LATEST_NEWS_QUERY_RESULT;

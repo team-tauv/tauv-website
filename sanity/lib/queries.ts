@@ -181,6 +181,23 @@ export const COMPETITIONS_QUERY = defineQuery(`
 `);
 
 /**
+ * Ana sayfadaki "Sezon Hedeflerimiz" bölümü. Geçmiş zaman çizelgesinden farkı:
+ * yalnızca `targeted` işaretli kayıtlar geliyor ve sıra tarihe göre ileriye
+ * doğru — hedefte sıradaki yarışma en üstte olmalı.
+ */
+export const TARGET_COMPETITIONS_QUERY = defineQuery(`
+  *[_type == "competition" && targeted == true] | order(date asc) {
+    _id,
+    name,
+    organizer,
+    year,
+    date,
+    "location": coalesce(location[language == $locale][0].value, location[language == $defaultLocale][0].value),
+    "goal": coalesce(goal[language == $locale][0].value, goal[language == $defaultLocale][0].value)
+  }
+`);
+
+/**
  * Sponsorluk sayfasındaki "Başarılarımız" vitrini. Yarışma zaman çizelgesinden
  * farkı: yalnızca derece girilmiş kayıtlar geliyor ve ağır alanlar (görsel,
  * açıklama, rapor) çekilmiyor — burada amaç anlatmak değil, kanıt sıralamak.
