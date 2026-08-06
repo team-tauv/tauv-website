@@ -153,8 +153,11 @@ async function run() {
 
   for (const pkg of PACKAGES) {
     tx.createIfNotExists({
-      // Sabit id — script tekrar çalışsa da kopya doküman üretmez.
-      _id: `sponsorshipPackage.${pkg.tier}`,
+      // Sabit id — script tekrar çalışsa da kopya doküman üretmez. Nokta
+      // KULLANMAYIN: `public` rolünün okuma izni `_id in path("*")` filtresine
+      // dayanıyor ve bu filtre noktalı (çok segmentli) id'lerle eşleşmiyor —
+      // doküman Studio'da görünür ama sitede anonim ziyaretçiye kapalı kalır.
+      _id: `sponsorshipPackage-${pkg.tier}`,
       _type: "sponsorshipPackage",
       tier: pkg.tier,
       featured: pkg.featured ?? false,
